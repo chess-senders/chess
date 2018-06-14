@@ -55,5 +55,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'bootstrap', '~> 4.1.1'
 
+# User authentication
 gem 'devise'
 gem 'omniauth-facebook'
+gem 'omniauth-google-oauth2'
