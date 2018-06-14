@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 20180614062902) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+<<<<<<< HEAD
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -34,4 +35,6 @@ ActiveRecord::Schema.define(version: 20180614062902) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+=======
+>>>>>>> feature/add-devise
 end
