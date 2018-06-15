@@ -1,5 +1,4 @@
-class User < ApplicationRecord
-  #Might want to add an index so we can lookup games by players - KD
+class Player < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
