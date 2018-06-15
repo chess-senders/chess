@@ -11,7 +11,7 @@ def set_omniauth(opts = {})
   provider = credentials[:provider]
   user_hash = credentials[provider]
 
-  shaka = OmniAuth::AuthHash.new({
+  stub = OmniAuth::AuthHash.new({
     'provider' => provider,
     'uid' => credentials[:uid],
     'info' => {
@@ -21,7 +21,5 @@ def set_omniauth(opts = {})
   })
 
   OmniAuth.config.test_mode = true
-  OmniAuth.config.mock_auth[provider] = shaka
-
-
+  OmniAuth.config.mock_auth[provider] = stub
 end
