@@ -1,0 +1,21 @@
+AllCops:
+  Exclude:
+    - Gemfile
+    - Rakefile
+    - 'db/schema.rb'
+    - 'bin/*'
+
+Documentation:
+  Enabled: false
+  
+Layout/CommentIndentation:
+  Enabled: false
+
+Metrics/LineLength:
+  Max: 1000
+
+Metrics/MethodLength:
+  Max: 100
+
+Style/EmptyMethod:
+  Enabled: false
