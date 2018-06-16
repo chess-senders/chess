@@ -15,6 +15,25 @@ ActiveRecord::Schema.define(version: 20180615143138) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "games", force: :cascade do |t|
+    t.integer  "white_player"
+    t.integer  "black_player"
+    t.integer  "state"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  create_table "pieces", force: :cascade do |t|
+    t.boolean  "captured?"
+    t.integer  "player_color"
+    t.integer  "row"
+    t.integer  "column"
+    t.integer  "type"
+    t.integer  "game_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
   create_table "players", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -31,6 +50,7 @@ ActiveRecord::Schema.define(version: 20180615143138) do
     t.string   "provider"
     t.string   "uid"
     t.string   "playername"
+    t.string   "username"
     t.index ["email"], name: "index_players_on_email", unique: true, using: :btree
     t.index ["playername"], name: "index_players_on_playername", using: :btree
     t.index ["reset_password_token"], name: "index_players_on_reset_password_token", unique: true, using: :btree

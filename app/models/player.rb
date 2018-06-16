@@ -12,4 +12,6 @@ class Player < ApplicationRecord
       player.playername = auth.info.name
     end
   end
+
+  has_many :games
 end
