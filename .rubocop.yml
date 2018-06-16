@@ -12,7 +12,7 @@ Layout/CommentIndentation:
   Enabled: false
 
 Metrics/LineLength:
-  Max: 1000
+  Max: 100
 
 Metrics/MethodLength:
   Max: 100
