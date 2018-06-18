@@ -4,6 +4,6 @@ FactoryBot.define do
       "dummyemail#{n}@gmail.com"
     end
     password 'password'
-    playername 'Chicken Joe'
+    playername ''
   end
 end

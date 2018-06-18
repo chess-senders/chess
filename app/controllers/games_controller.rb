@@ -6,12 +6,16 @@ class GamesController < ApplicationController
   end
 
   def new
+    @game = Game.new
   end
 
   def create
-    @black_player = Player.find_by email: params[:opponent_email]
-    @game = Game.create({white_player: current_player, black_player: @black_player})
-    redirect_to game_path(@game)
+    @game = Game.create(game_params.merge(white_player: current_player))
+    if @game.valid?
+			redirect_to game_path(@game)
+		else
+			render :new, status: :unprocessable_entity
+		end
   end
 
   def show
@@ -22,5 +26,9 @@ class GamesController < ApplicationController
   end
 
   private
+
+  def game_params
+    params.require(:game).permit(:name)
+  end
 
 end

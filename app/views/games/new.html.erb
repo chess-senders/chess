@@ -1,5 +1,4 @@
-<%= simple_form_for :player, :url => '/games' do |f| %>
-  <label label-for='opponent_email'></label>
-  <input name="opponent_email"/>
-  <%= f.submit 'add player' %>
+<%= simple_form_for @game do |f| %>
+<%= f.input :name, label: 'Game name' %>
+<%= f.submit 'create!' %>
 <% end %>
