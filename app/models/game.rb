@@ -7,7 +7,7 @@ class Game < ApplicationRecord
     'White Won'
   ]
 
-  belongs_to :white_player_id, class_name: :Player
-  belongs_to :black_player_id, class_name: :Player
+  belongs_to :white_player, class_name: :Player
+  belongs_to :black_player, class_name: :Player
   has_many :pieces
 end
