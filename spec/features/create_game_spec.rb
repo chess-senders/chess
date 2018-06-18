@@ -13,6 +13,7 @@ feature 'A player creates a game' do
     visit '/games/new'
     fill_in('opponent_email', with: player2.email)
     game = FactoryBot.create(:game, white_player: player1, black_player: player2)
+    
     click_button('add player')
     visit "/games/#{game.id}"
     expect(page).to have_content("#{player1.playername} vs. #{player2.playername}")
