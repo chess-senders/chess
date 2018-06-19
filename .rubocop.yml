@@ -7,8 +7,11 @@ AllCops:
 
 Documentation:
   Enabled: false
-  
+
 Layout/CommentIndentation:
+  Enabled: false
+
+Style/Tab:
   Enabled: false
 
 Metrics/LineLength:

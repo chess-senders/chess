@@ -1,5 +1,4 @@
 class GamesController < ApplicationController
-
   before_action :authenticate_player!
 
   def index
@@ -12,10 +11,10 @@ class GamesController < ApplicationController
   def create
     @game = Game.create(game_params.merge(white_player: current_player))
     if @game.valid?
-			redirect_to game_path(@game)
-		else
-			render :new, status: :unprocessable_entity
-		end
+      redirect_to game_path(@game)
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def show
@@ -30,5 +29,4 @@ class GamesController < ApplicationController
   def game_params
     params.require(:game).permit(:name)
   end
-
 end
