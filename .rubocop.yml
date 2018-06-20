@@ -4,6 +4,8 @@ AllCops:
     - Rakefile
     - 'db/schema.rb'
     - 'bin/*'
+    - 'config/initializers/simple_form.rb'
+    - 'config/initializers/simple_form_bootstrap.rb'
 
 Documentation:
   Enabled: false
@@ -11,7 +13,7 @@ Documentation:
 Layout/CommentIndentation:
   Enabled: false
 
-Style/Tab:
+Layout/Tab:
   Enabled: false
 
 Metrics/LineLength:
