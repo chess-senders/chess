@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180616141430) do
+ActiveRecord::Schema.define(version: 20180618211305) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,9 +18,10 @@ ActiveRecord::Schema.define(version: 20180616141430) do
   create_table "games", force: :cascade do |t|
     t.integer  "white_player_id"
     t.integer  "black_player_id"
-    t.integer  "state"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.integer  "state",           default: 0
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.string   "name"
     t.index ["white_player_id", "black_player_id"], name: "index_games_on_white_player_id_and_black_player_id", using: :btree
   end
 
@@ -52,7 +53,6 @@ ActiveRecord::Schema.define(version: 20180616141430) do
     t.string   "provider"
     t.string   "uid"
     t.string   "playername"
-    t.string   "username"
     t.index ["email"], name: "index_players_on_email", unique: true, using: :btree
     t.index ["playername"], name: "index_players_on_playername", using: :btree
     t.index ["reset_password_token"], name: "index_players_on_reset_password_token", unique: true, using: :btree
