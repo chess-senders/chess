@@ -5,6 +5,6 @@ FactoryBot.define do
     row 2
     column 1
     type 2
-    game_id nil
+    game_id { FactoryBot.build(:game).id }
   end
 end
