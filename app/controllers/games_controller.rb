@@ -25,10 +25,10 @@ class GamesController < ApplicationController
   def update
     @game = Game.find(params[:id])
     if @game.white_player != current_player
-      @game.update(:black_player => current_player, :state => 1)
+      @game.update(black_player: current_player, state: 1)
       redirect_to game_path(@game)
     else
-      flash.alert = "You are already in this game"
+      flash.alert = 'You are already in this game'
       redirect_to games_path
     end
   end
