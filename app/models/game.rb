@@ -1,4 +1,8 @@
 class Game < ApplicationRecord
+  belongs_to :white_player, class_name: :Player
+  belongs_to :black_player, class_name: :Player, optional: true
+  has_many :pieces
+
   enum state: [
     'Waiting for players',
     "White's Turn",
@@ -7,7 +11,12 @@ class Game < ApplicationRecord
     'White Won'
   ]
 
-  belongs_to :white_player, class_name: :Player
-  belongs_to :black_player, class_name: :Player, optional: true
-  has_many :pieces
+  def get_piece(row, column)
+    pieces.where(row: row, column: column).first
+  end
+
+  def square_occupied?(row, column)
+    pieces.where(row: row, column: column).any?
+  end
+
 end
