@@ -12,7 +12,7 @@ module Pieces
       return horizontal_obstruction if start_row == end_row
       return vertical_obstruction if start_column == end_column
       return diagnol_obstruction if (start_row - end_row).abs == (start_column - end_column).abs
-      rescue 
+      return nil
     end
 
     private

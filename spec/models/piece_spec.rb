@@ -40,7 +40,13 @@ RSpec.describe Piece, type: :model do
     end
 
     it 'Should detect an invalid input' do
-      
+      obstruction = Pieces::IsObstructed.call(
+        {
+          start: { row: 0, column: 0 },
+          end: { row: 1, column: 3 }
+        }, game
+      )
+      expect(obstruction).to eq(nil)
     end
   end
 end
