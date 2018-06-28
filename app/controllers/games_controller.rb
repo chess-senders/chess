@@ -2,7 +2,7 @@ class GamesController < ApplicationController
   before_action :authenticate_player!
 
   def index
-    @games = Game.where("white_player_id != ?", current_player.id)
+    @games = Game.where('white_player_id != ?', current_player.id)
   end
 
   def new

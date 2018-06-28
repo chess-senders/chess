@@ -2,7 +2,6 @@ require 'rails_helper'
 require 'support/sign_in'
 
 feature 'A player tries to join a game' do
-
   white_player = FactoryBot.create(:player, playername: 'Rikter')
   black_player = FactoryBot.create(:player, playername: 'Sender')
   game = FactoryBot.create(:game, white_player: white_player)
@@ -22,6 +21,6 @@ feature 'A player tries to join a game' do
     visit '/games'
     expect(page).to have_link('Game ON!')
     click_link 'Game ON!'
-    expect{visit "/games/#{100}"}.to raise_error(ActiveRecord::RecordNotFound)
+    expect { visit '/games/100' }.to raise_error(ActiveRecord::RecordNotFound)
   end
 end
