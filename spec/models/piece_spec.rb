@@ -38,5 +38,9 @@ RSpec.describe Piece, type: :model do
       )
       expect(obstruction).to eq(true)
     end
+
+    it 'Should detect an invalid input' do
+      
+    end
   end
 end
