@@ -11,6 +11,7 @@
 # a separate helper file that requires the additional dependencies and performs
 # the additional setup, and require it from the spec files that actually need
 # it.
+
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
@@ -26,6 +27,14 @@ RSpec.configure do |config|
     # ...rather than:
     #     # => "be bigger than 2"
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
+  end
+
+  config.after(:each) do
+    DatabaseCleaner.strategy = :transaction
+  end
+
+  config.after(:suite) do
+    DatabaseCleaner.clean_with(:truncation)
   end
 
   # rspec-mocks config goes here. You can use an alternate test double

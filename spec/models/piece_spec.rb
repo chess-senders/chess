@@ -25,7 +25,7 @@ RSpec.describe Piece, type: :model do
     end
 
     it "Should detect an invalid input" do
-      
+
     end
   end
 end
