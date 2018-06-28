@@ -4,7 +4,7 @@ class Piece < ApplicationRecord
 
   belongs_to :game
 
-  def is_obstructed?(move)
+  def obstructed?(move)
     return horizontal_obstruction(move) if self.row == move[:row]
     return vertical_obstruction(move) if self.column == move[:column]
     return diagnol_obstruction(move) if (self.row - move[:row]).abs == (self.column - move[:column]).abs
@@ -30,14 +30,14 @@ class Piece < ApplicationRecord
     (column_start(move[:column])...column_destination(move[:column])).each do |column|
       return true if game.square_occupied?(self.row, column)
     end
-    return false
+    false
   end
 
   def vertical_obstruction(move)
     (row_start(move[:row])...row_destination(move[:column])).each do |row|
       return true if game.square_occupied?(row, self.column)
     end
-    return false
+    false
   end
 
   def diagnol_obstruction(move)
@@ -46,7 +46,7 @@ class Piece < ApplicationRecord
         return true if game.square_occupied?(row, column)
       end
     end
-    return false
+    false
   end
 
 end
