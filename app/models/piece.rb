@@ -5,9 +5,9 @@ class Piece < ApplicationRecord
   belongs_to :game
 
   def obstructed?(move)
-    return horizontal_obstruction(move) if self.row == move[:row]
-    return vertical_obstruction(move) if self.column == move[:column]
-    return diagnol_obstruction(move) if (self.row - move[:row]).abs == (self.column - move[:column]).abs
+    return horizontal_obstruction(move) if row == move[:row]
+    return vertical_obstruction(move) if column == move[:column]
+    return diagnol_obstruction(move) if (row - move[:row]).abs == (column - move[:column]).abs
   end
 
   def column_start(column)
@@ -20,7 +20,7 @@ class Piece < ApplicationRecord
 
   def column_destination(column)
     [self.column, column].max
-  end
+  endf
 
   def row_destination(row)
     [self.row, row].max + 1
@@ -48,5 +48,4 @@ class Piece < ApplicationRecord
     end
     false
   end
-
 end

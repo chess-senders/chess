@@ -18,5 +18,4 @@ class Game < ApplicationRecord
   def square_occupied?(row, column)
     pieces.where(row: row, column: column).any?
   end
-
 end
