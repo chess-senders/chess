@@ -1,11 +1,12 @@
 module Pieces
   class IsObstructed < ApplicationService
-    def initialize(move, game)
-      @game = game
-      @current_column = move[:current][:column]
-      @current_row = move[:current][:row]
-      @new_column = move[:new][:column]
-      @new_row = move[:new][:row]
+    def initialize(piece, new_square)
+      @piece = piece
+      @game = piece.game
+      @current_column = piece[:column]
+      @current_row = piece[:row]
+      @new_column = new_square[:column]
+      @new_row = new_square[:row]
     end
 
     def call
@@ -17,7 +18,7 @@ module Pieces
 
     private
 
-    attr_accessor :game, :current_row, :current_column, :new_row, :new_column
+    attr_accessor :game, :piece, :current_row, :current_column, :new_row, :new_column
 
     def column_current
       [current_column, new_column].min + 1
