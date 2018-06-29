@@ -2,6 +2,7 @@ class GamesController < ApplicationController
   before_action :authenticate_player!
 
   def index
+    @games = Game.where('white_player_id != ?', current_player.id)
   end
 
   def new
@@ -22,6 +23,12 @@ class GamesController < ApplicationController
   end
 
   def update
+    @game = Game.find(params[:id])
+    if @game.valid? && current_player != @game.white_player
+      @game.update(black_player: current_player, state: 1)
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   private

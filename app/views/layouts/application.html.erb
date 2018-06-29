@@ -17,6 +17,12 @@
         <%= link_to "Sign in with Google", player_google_oauth2_omniauth_authorize_path %>
       <% end %>
     </header>
+    <% if notice.present? %>
+      <p class="alert alert-info text-center"><%= notice %></p>
+    <% end %>
+    <% if alert.present? %>
+      <p class="alert alert-danger text-center"><%= alert %></p>
+    <% end %>
     <%= yield %>
   </body>
 </html>
