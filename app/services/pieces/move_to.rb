@@ -1,6 +1,5 @@
 module Pieces
   class MoveTo < ApplicationService
-
     def initialize(piece, new_square)
       @piece = piece
       @game = piece.game
@@ -22,12 +21,11 @@ module Pieces
       else
         piece.update_attributes(column: new_column, row: new_row)
       end
-      return true
+      true
     end
 
     private
 
     attr_accessor :game, :piece, :current_row, :current_column, :new_row, :new_column
-
   end
 end

@@ -13,7 +13,7 @@ module Pieces
       return horizontal_obstruction if current_row == new_row
       return vertical_obstruction if current_column == new_column
       return diagnol_obstruction if (current_column - new_column).abs == (current_row - new_row).abs
-      return nil
+      nil
     end
 
     private
