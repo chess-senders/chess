@@ -11,11 +11,11 @@ class Game < ApplicationRecord
     'White Won'
   ]
 
-  def get_piece(row, column)
-    pieces.where(row: row, column: column).first
+  def get_piece(column, row)
+    pieces.where(column: column, row: row).first
   end
 
-  def square_occupied?(row, column)
-    pieces.where(row: row, column: column).any?
+  def square_occupied?(column, row)
+    pieces.where(column: column, row: row).any?
   end
 end

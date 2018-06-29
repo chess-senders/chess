@@ -2,16 +2,16 @@ module Pieces
   class IsObstructed < ApplicationService
     def initialize(move, game)
       @game = game
-      @start_row = move[:start][:row]
       @start_column = move[:start][:column]
-      @end_row = move[:end][:row]
+      @start_row = move[:start][:row]
       @end_column = move[:end][:column]
+      @end_row = move[:end][:row]
     end
 
     def call
       return horizontal_obstruction if start_row == end_row
       return vertical_obstruction if start_column == end_column
-      return diagnol_obstruction if (start_row - end_row).abs == (start_column - end_column).abs
+      return diagnol_obstruction if (start_column - end_column).abs == (start_row - end_row).abs
       return nil
     end
 
@@ -37,14 +37,14 @@ module Pieces
 
     def horizontal_obstruction
       (column_start...column_end).each do |column|
-        return true if game.square_occupied?(start_row, column)
+        return true if game.square_occupied?(column, start_row)
       end
       false
     end
 
     def vertical_obstruction
       (row_start...row_end).each do |row|
-        return true if game.square_occupied?(row, start_column)
+        return true if game.square_occupied?(start_column, row)
       end
       false
     end
@@ -52,7 +52,7 @@ module Pieces
     def diagnol_obstruction
       (row_start...row_end).each do |row|
         (column_start...column_end).each do |column|
-          return true if game.square_occupied?(row, column)
+          return true if game.square_occupied?(column, row)
         end
       end
       false
