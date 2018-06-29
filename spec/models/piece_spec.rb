@@ -52,7 +52,8 @@ RSpec.describe Piece, type: :model do
 
   context 'Capturing a piece' do
     it 'Should not move to new location if same colour piece is there' do
-      move = piece1.move_to!(piece3[:column], piece3[:row])
+      move = Pieces::MoveTo.call(piece1, { column: piece3[:column], row: piece3[:row] }
+      )
       expect(move).to eq(false)
       expect(piece1[:column]).to eq(3)
       expect(piece1[:row]).to eq(2)
