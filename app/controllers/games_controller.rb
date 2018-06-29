@@ -24,7 +24,11 @@ class GamesController < ApplicationController
 
   def update
     @game = Game.find(params[:id])
-    @game.update(black_player: current_player, state: 1)
+    if current_player != @game.white_player
+      @game.update(black_player: current_player, state: 1)
+    else
+      render :plain, 'You have already joined this game'
+    end
     if @game.valid?
       redirect_to game_path(@game)
     else
