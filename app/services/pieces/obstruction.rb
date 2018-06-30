@@ -1,5 +1,5 @@
 module Pieces
-  class IsObstructed < ApplicationService
+  class Obstruction < ApplicationService
     def initialize(piece, new_square)
       @piece = piece
       @game = piece.game

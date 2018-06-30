@@ -10,17 +10,17 @@ RSpec.describe Piece, type: :model do
 
   context 'attempting to move a piece' do
     it 'Should detect horizontal obstructions' do
-      obstruction = Pieces::IsObstructed.call(piece2, column: 4, row: 2)
+      obstruction = Pieces::Obstruction.call(piece2, column: 4, row: 2)
       expect(obstruction).to eq(true)
     end
 
     it 'Should detect vertical obstructions' do
-      obstruction = Pieces::IsObstructed.call(piece3, column: 2, row: 0)
+      obstruction = Pieces::Obstruction.call(piece3, column: 2, row: 0)
       expect(obstruction).to eq(true)
     end
 
     it 'Should detect diagnol obstructions' do
-      obstruction = Pieces::IsObstructed.call(piece4, column: 0, row: 0)
+      obstruction = Pieces::Obstruction.call(piece4, column: 0, row: 0)
       expect(obstruction).to eq(true)
     end
   end
