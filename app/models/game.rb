@@ -23,9 +23,21 @@ class Game < ApplicationRecord
   end
 
   def add_pieces_to_board
+    # only add if there aren't pieces already
+    add_white_pieces unless (pieces.find_by_player_color(white_player))
+
+    # in case we're waiting on the second player
+    if black_player
+      add_black_pieces unless (pieces.find_by_player_color(black_player))
+    end
+  end
+
+  def add_white_pieces
     add_back_row(white_player_id, 0)
     add_pawns(white_player_id, 1)
+  end
 
+  def add_black_pieces
     add_back_row(black_player_id, 7)
     add_pawns(black_player_id, 6)
   end
