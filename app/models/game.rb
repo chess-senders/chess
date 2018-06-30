@@ -32,6 +32,8 @@ class Game < ApplicationRecord
     end
   end
 
+  private
+
   def add_white_pieces
     add_back_row(white_player_id, 0)
     add_pawns(white_player_id, 1)
@@ -57,6 +59,13 @@ class Game < ApplicationRecord
     add_king(player_id, row, 4)
   end
 
+  def add_pawns(player_id, row)
+    8.times do |col|
+      add_pawn(player_id, row, col)
+    end
+  end
+
+  # waiting to get pieces STI to put these in w/ correct types
   def add_rook(player_id, row, col)
     pieces << Piece.create(
       player_color: player_id,
@@ -100,12 +109,6 @@ class Game < ApplicationRecord
       column: col
       # type: 0
     )
-  end
-
-  def add_pawns(player_id, row)
-    8.times do |col|
-      add_pawn(player_id, row, col)
-    end
   end
 
   def add_pawn(player_id, row, col)
