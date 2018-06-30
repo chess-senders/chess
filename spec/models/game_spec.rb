@@ -30,10 +30,7 @@ RSpec.describe Game, type: :model do
 
     it "shouldn't add black pieces without a black_player in Game" do
       white_player = FactoryBot.create(:player, playername: 'Wayne')
-      game = FactoryBot.create(
-        :game,
-        white_player: white_player
-      )
+      game = FactoryBot.create(:game, white_player: white_player)
 
       game.add_pieces_to_board
 
