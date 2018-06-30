@@ -3,9 +3,19 @@ class Piece < ApplicationRecord
 
   belongs_to :game
 
-  #don't update state if 0 is passed in to a move
+  def move(new_row, new_col)
+    if validate_move(new_row, new_col)
+      move_diagonal(new_row, new_col)
+    end
+  end
+
+  protected
+  def validate_move(new_row, new_col)
+    validate_in_bounds
+  end
+
   def move_linear(rows_to_move)
-      self.row += rows_to_move
+    self.row += rows_to_move
   end
 
   def move_lateral(cols_to_move)
@@ -17,44 +27,22 @@ class Piece < ApplicationRecord
     move_lateral(cols_to_move)
   end
 
-  def validate_row_movement(new_row)
-    if(new_row - self.row > 8) || (new_row - self.row < 1)
-      return 0
-    end
+  def validate_movement(max, min, new_pos)
+    (new_pos <= max) && (new_pos >= min)
   end
 
-  def validate_col_movement(new_col)
-    if (new_col - self.col > 8) || (new_col - self.col < 1)
-      return 0
-    end
+  def validate_in_bounds(new_row, new_col)
+    validate_movement(8, 1, new_row) && validate_movement(8, 1, new_col)
   end
 end
 
 
 class King < Piece
   def validate_move(new_row, new_col)
-    validate_row_movement(new_row)
-    validate_col_movement(new_col)
-
-    if (new_row - self.row > 1) || (new_row - self.row < -1)
-      #invalid move
-      return 0
-    end
-
-    if (new_col - self.col > 1) || (new_col - self.col < -1)
-      return 0
-    end
+    super &&
+    validate_movement(1, -1, new_row-self.row) &&
+    validate_movement(1, -1, new_col-self.col)
   end
-
-  def validate_col_movement(new_col)
-    if (new_col - self.col > 1) || (new_col - self.col < -1)
-      #invalid move
-      return 0
-    else
-      return (new_col - self.col)
-    end
-
-end
 end
 
 class Queen < Piece
@@ -62,57 +50,17 @@ class Queen < Piece
 end
 
 class Rook < Piece
-  #make sure cannot move diagonally
-  def validate_move(new_row, new_col)
-    validate_col_movement(new_col)
-    validate_row_movement(new_row)
-    if (new_row != self.row) && (new_col != self.col)
-      return 0
-    end
-  end
 
 end
 
 class Bishop < Piece
-  #must move diagonally
-  validate_col_movement(new_col)
-  validate_row_movement(new_row)
-  def validate_move(new_row, new_col)
-    if (new_row == self.row) || (new_col == self.col)
-      return 0
-    end
-  end
+
 end
 
 class Knight < Piece
-  def validate_move(new_row, new_col)
-    validate_col_movement(new_col)
-    validate_row_movement(new_row)
-    if (new_row - self.row > 2) || (new_row - self.row < -2)
-      return 0
-    end
 
-    if (new_col - self.col > 2) || (new_col - self.col < -2)
-      return 0
-    end
-
-    if (new_row - self.row == 2 || new_row - self.row == -2) && (new_col - self.col != 1 || new_col - self.col != -1)
-      return 0
-    end
-
-    if (new_col - self.col == 2 || new_col - self.col == -2) && (new_row - self.col != 1 || new_row - self.col != -1)
-      return 0
-    end
-  end
 end
 
 class Pawn < Piece
-  def validate_move(new_row, new_col)
-    validate_row_movement(new_row)
-    return 0 if new_col != self.col
-    if self.row == 2
-      return 0 if (new_row - self.row > 2 )
-    else
-      return 0 if (new_row - self.row != 1)
-  end
+
 end
