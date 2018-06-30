@@ -11,7 +11,7 @@ class Piece < ApplicationRecord
 
   protected
   def validate_move(new_row, new_col)
-    validate_in_bounds
+    validate_in_bounds(new_row, new_col)
   end
 
   def move_linear(rows_to_move)
@@ -34,33 +34,4 @@ class Piece < ApplicationRecord
   def validate_in_bounds(new_row, new_col)
     validate_movement(8, 1, new_row) && validate_movement(8, 1, new_col)
   end
-end
-
-
-class King < Piece
-  def validate_move(new_row, new_col)
-    super &&
-    validate_movement(1, -1, new_row-self.row) &&
-    validate_movement(1, -1, new_col-self.col)
-  end
-end
-
-class Queen < Piece
-
-end
-
-class Rook < Piece
-
-end
-
-class Bishop < Piece
-
-end
-
-class Knight < Piece
-
-end
-
-class Pawn < Piece
-
 end
