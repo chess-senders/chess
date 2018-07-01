@@ -24,11 +24,11 @@ class Game < ApplicationRecord
 
   def add_pieces_to_board
     # only add if there aren't pieces already
-    add_white_pieces unless (pieces.find_by_player_color(white_player))
+    add_white_pieces unless pieces.find_by_player_color(white_player)
 
     # in case we're waiting on the second player
     if black_player
-      add_black_pieces unless (pieces.find_by_player_color(black_player))
+      add_black_pieces unless pieces.find_by_player_color(black_player)
     end
   end
 

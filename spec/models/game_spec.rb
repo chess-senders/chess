@@ -3,11 +3,10 @@ require 'rails_helper'
 RSpec.describe Game, type: :model do
   describe 'validations' do
     it 'is not valid without a white player' do
-      expect {
-        FactoryBot.create(:game, white_player: nil)
-      }.to raise_error(
+      expect { FactoryBot.create(:game, white_player: nil) }.to raise_error(
         ActiveRecord::RecordInvalid,
-        'Validation failed: White player can\'t be blank, White player must exist')
+        'Validation failed: White player can\'t be blank, White player must exist'
+      )
     end
   end
 
