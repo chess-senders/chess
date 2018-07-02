@@ -14,16 +14,16 @@ class Piece < ApplicationRecord
     in_bounds?(new_row, new_col)
   end
 
-  def move_linear(rows_to_move)
-    self.row += rows_to_move
+  def move_linear(new_row)
+    self.row = new_row
   end
 
-  def move_lateral(cols_to_move)
-    self.column += cols_to_move
+  def move_lateral(new_col)
+    self.column = new_col
   end
 
-  def move_diagonal(rows_to_move, cols_to_move)
-    move_linear(rows_to_move)
+  def move_diagonal(new_row, new_col)
+    move_linear(new_row)
     move_lateral(cols_to_move)
   end
 
