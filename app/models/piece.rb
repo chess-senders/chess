@@ -4,14 +4,14 @@ class Piece < ApplicationRecord
   belongs_to :game
 
   def move(new_row, new_col)
-    if validate_move(new_row, new_col)
+    if valid_move?(new_row, new_col)
       move_diagonal(new_row, new_col)
     end
   end
 
   protected
-  def validate_move(new_row, new_col)
-    validate_in_bounds(new_row, new_col)
+  def valid_move?(new_row, new_col)
+    in_bounds?(new_row, new_col)
   end
 
   def move_linear(rows_to_move)
@@ -27,11 +27,11 @@ class Piece < ApplicationRecord
     move_lateral(cols_to_move)
   end
 
-  def validate_movement(max, min, new_pos)
+  def valid_movement?(max, min, new_pos)
     (new_pos <= max) && (new_pos >= min)
   end
 
-  def validate_in_bounds(new_row, new_col)
-    validate_movement(8, 1, new_row) && validate_movement(8, 1, new_col)
+  def in_bounds?(new_row, new_col)
+    valid_movement?(8, 1, new_row) && valid_movement?(8, 1, new_col)
   end
 end
