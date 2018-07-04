@@ -19,7 +19,9 @@ class GamesController < ApplicationController
   end
 
   def show
-    @game = Game.find(params[:id])
+    current_game
+    @y_range = (1..8).to_a
+    @x_range = (1..8).to_a
   end
 
   def update
@@ -32,6 +34,21 @@ class GamesController < ApplicationController
   end
 
   private
+
+  helper_method :render_piece
+  def render_piece(x, y)
+    @piece = current_game.piece.where(:row => x, :column => y)
+    if @piece != nil
+      @piece_text = "#{@piece.player_color} #{@piece.type}"
+    end
+  end
+
+  helper_method :current_game
+  def current_game
+    @current_game ||= Game.find(params[:id])
+  end
+
+  helper_method :current_game
 
   def game_params
     params.require(:game).permit(:name)

@@ -2,19 +2,21 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 $blackbg: #000000;
+$whitebg: #ffffff;
 
 .chessboard {
   margin: auto;
 }
 
-.black,
-.white {
-  border-style: solid;
-  border-width: 1px;
-  height: 50px;
-  width: 50px;
+table {
+  margin: 0 auto;
+  border-collapse: collapse;
+  background: $blackbg;
+}
+td {
+    width: 40px; height: 40px;
 }
 
-.black {
-  background: $blackbg;
+tr:nth-child(odd) td:nth-child(even), tr:nth-child(even) td:nth-child(odd) {
+  background: $whitebg;
 }
