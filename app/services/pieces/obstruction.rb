@@ -20,40 +20,42 @@ module Pieces
 
     attr_accessor :game, :piece, :current_row, :current_column, :new_row, :new_column
 
-    def column_current
+    def column_start
       [current_column, new_column].min + 1
     end
 
-    def row_current
+    def row_start
       [current_row, new_row].min + 1
     end
 
-    def column_new
+    def column_end
       [current_column, new_column].max
     end
 
-    def row_new
-      [current_row, new_row].max + 1
+    def row_end
+      [current_row, new_row].max
     end
 
     def horizontal_obstruction
-      (column_current...column_new).each do |column|
+      (column_start...column_end).each do |column|
         return true if game.square_occupied?(column, current_row)
       end
       false
     end
 
     def vertical_obstruction
-      (row_current...row_new).each do |row|
+      (row_start...row_end).each do |row|
         return true if game.square_occupied?(current_column, row)
       end
       false
     end
 
     def diagnol_obstruction
-      (row_current...row_new).each do |row|
-        (column_current...column_new).each do |column|
-          return true if game.square_occupied?(column, row)
+      (row_start...row_end).each do |row|
+        (column_start...column_end).each do |column|
+          if row == column
+            return true if game.square_occupied?(column, row)
+          end
         end
       end
       false
