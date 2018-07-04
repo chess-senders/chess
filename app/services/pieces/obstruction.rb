@@ -33,7 +33,7 @@ module Pieces
     end
 
     def row_new
-      [current_row, new_row].max + 1
+      [current_row, new_row].max
     end
 
     def horizontal_obstruction
