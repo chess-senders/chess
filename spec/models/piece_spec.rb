@@ -2,35 +2,25 @@ require 'rails_helper'
 
 RSpec.describe Piece, type: :model do
   describe "a player wants to move his piece" do
-    it "will determine the position of the piece first" do
+    it "will move if the piece is in bounds" do
       piece = FactoryBot.build(:piece)
-      expect(piece.row).to eq(2)
-    end
-
-    it "can move linearly in either direction" do
-      piece = FactoryBot.build(:piece)
-      piece.move_linear(3)
+      piece.move(5,4)
       expect(piece.row).to eq(5)
-      piece.move_linear(-2)
-      expect(piece.row).to eq(3)
-    end
-
-    it "can move laterally in either direction" do
-      piece = FactoryBot.build(:piece)
-      piece.move_lateral(3)
       expect(piece.column).to eq(4)
-      piece.move_lateral(-2)
-      expect(piece.column).to eq(2)
     end
 
-    it "can move diagonally in either direction" do
+    it "will not move if the piece's new column is out of bounds" do
       piece = FactoryBot.build(:piece)
-      piece.move_diagonal(4,4)
-      expect(piece.row).to eq(6)
-      expect(piece.column).to eq(5)
-      piece.move_diagonal(-2,-2)
-      expect(piece.row).to eq(4)
-      expect(piece.column).to eq(3)
+      piece.move(5,9)
+      expect(piece.row).to eq(2)
+      expect(piece.column). to eq(1)
+    end
+
+    it "will not move if the piece's new row is out of bounds" do
+      piece = FactoryBot.build(:piece)
+      piece.move(9,4)
+      expect(piece.row).to eq(2)
+      expect(piece.column).to eq(1)
     end
   end
 end

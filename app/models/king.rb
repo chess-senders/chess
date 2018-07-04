@@ -1,7 +1,7 @@
 class King < Piece
   def valid_move?(new_row, new_col)
     super &&
-    validate_movement(1, -1, new_row - self.row) &&
-    validate_movement(1, -1, new_col - self.col)
+    valid_movement?(1, -1, new_row - self.row) &&
+    valid_movement?(1, -1, new_col - self.column)
   end
 end

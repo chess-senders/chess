@@ -22,7 +22,7 @@ class Piece < ApplicationRecord
 
   def move_diagonal(new_row, new_col)
     move_linear(new_row)
-    move_lateral(cols_to_move)
+    move_lateral(new_col)
   end
 
   def valid_movement?(max, min, new_pos)
