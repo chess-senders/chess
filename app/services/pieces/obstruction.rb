@@ -51,12 +51,17 @@ module Pieces
     end
 
     def diagnol_obstruction
+      row_delta = 0
+      column_delta = 0
       (row_start...row_end).each do |row|
+        row_delta += 1
         (column_start...column_end).each do |column|
-          if row == column
+          column_delta += 1
+          if row_delta == column_delta
             return true if game.square_occupied?(column, row)
           end
         end
+        column_delta = 0
       end
       false
     end
