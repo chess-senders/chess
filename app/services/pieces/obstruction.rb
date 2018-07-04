@@ -52,7 +52,6 @@ module Pieces
 
     def diagnol_obstruction
       (row_start...row_end).each do |row|
-        puts "row = #{row}"
         (column_start...column_end).each do |column|
           if row == column
             return true if game.square_occupied?(column, row)
