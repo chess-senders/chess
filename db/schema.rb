@@ -50,9 +50,9 @@ ActiveRecord::Schema.define(version: 20180704065553) do
     t.inet     "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.string   "playername"
     t.string   "provider"
     t.string   "uid"
-    t.string   "playername"
     t.index ["email"], name: "index_players_on_email", unique: true, using: :btree
     t.index ["playername"], name: "index_players_on_playername", using: :btree
     t.index ["reset_password_token"], name: "index_players_on_reset_password_token", unique: true, using: :btree
