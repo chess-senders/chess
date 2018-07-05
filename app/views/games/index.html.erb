@@ -1,0 +1,5 @@
+<h1>List of Games</h1>
+<br/>
+<% @games.available.each do |game| %>
+    <p><%= link_to game.name, game_path(game), :method=> :put %></p>
+<% end %>

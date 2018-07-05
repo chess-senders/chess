@@ -1,3 +1,9 @@
+GIT
+  remote: https://github.com/codahale/bcrypt-ruby.git
+  revision: 12a50f4ff20c1723cc08b3f3c5dcd257c305172c
+  specs:
+    bcrypt (3.1.12)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -44,8 +50,6 @@ GEM
     ast (2.4.0)
     autoprefixer-rails (8.6.2)
       execjs
-    bcrypt (3.1.11)
-    bcrypt (3.1.11-x64-mingw32)
     bindex (0.5.0)
     bootstrap (4.1.1)
       autoprefixer-rails (>= 6.0.3)
@@ -70,6 +74,7 @@ GEM
     coffee-script-source (1.12.2)
     concurrent-ruby (1.0.5)
     crass (1.0.4)
+    database_cleaner (1.7.0)
     devise (4.4.3)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -270,10 +275,12 @@ PLATFORMS
   x64-mingw32
 
 DEPENDENCIES
+  bcrypt!
   bootstrap (~> 4.1.1)
   byebug
   capybara
   coffee-rails (~> 4.2)
+  database_cleaner
   devise
   factory_bot_rails
   figaro
