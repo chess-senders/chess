@@ -15,13 +15,17 @@ RSpec.describe Piece, type: :model do
     end
 
     it 'Should detect vertical obstructions' do
-      obstruction = Pieces::Obstruction.call(piece3, column: 2, row: 0)
+      obstruction = Pieces::Obstruction.call(piece3, column: 2, row: 1)
       expect(obstruction).to eq(true)
     end
 
-    it 'Should detect diagnol obstructions' do
-      obstruction = Pieces::Obstruction.call(piece4, column: 0, row: 0)
+    it 'Should detect diagnol obstructions down and right' do
+      obstruction = Pieces::Obstruction.call(piece4, column: 1, row: 1)
       expect(obstruction).to eq(true)
+    end
+
+    it 'Should detect diagnol obstructions up and right' do
+      obstruction = Pieces::Obstruction.call(piece3, column: 4, row: 1)
     end
   end
 
