@@ -21,7 +21,7 @@ module Pieces
     attr_accessor :game, :piece, :current_row, :current_column, :new_row, :new_column
 
     def column_start
-      [current_column, new_column].min
+      [current_column, new_column].min + 1
     end
 
     def row_start
@@ -37,7 +37,7 @@ module Pieces
     end
 
     def horizontal_obstruction
-      (column_start + 1...column_end).each do |column|
+      (column_start...column_end).each do |column|
         return true if game.square_occupied?(column, current_row)
       end
       false
@@ -55,14 +55,14 @@ module Pieces
       if down_right == true
         (row_start...row_end).each do |row|
           column_delta = row - row_start
-          column = column_start + 1 + column_delta
+          column = column_start + column_delta
           return true if game.square_occupied?(column, row)
         end
       # diagonal going down and left or up and right
       else
         (row_start...row_end).each do |row|
           column_delta = row_start - row
-          column = column_start - 1 + column_delta
+          column = column_end - 1 + column_delta
           return true if game.square_occupied?(column, row)
         end
       end
@@ -72,7 +72,7 @@ module Pieces
     def down_right
       if current_column < new_column && current_row < new_row
         true
-      elsif current_column > new_column && current_column > new_row
+      elsif current_column > new_column && current_row > new_row
         true
       else
         false

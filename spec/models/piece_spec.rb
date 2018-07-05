@@ -26,6 +26,7 @@ RSpec.describe Piece, type: :model do
 
     it 'Should detect diagnol obstructions up and right' do
       obstruction = Pieces::Obstruction.call(piece3, column: 4, row: 1)
+      expect(obstruction).to eq(true)
     end
   end
 
