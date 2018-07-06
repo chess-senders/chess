@@ -12,12 +12,9 @@ module Pieces
     def call
       if game.square_occupied?(new_column, new_row)
         new_piece = game.get_piece(new_column, new_row)
-        if new_piece.player_color != piece.player_color
-          piece.update_attributes(column: new_column, row: new_row)
-          new_piece.update_attributes(captured: true)
-        else
-          return false
-        end
+        return false unless new_piece.player_color != piece.player_color
+        piece.update_attributes(column: new_column, row: new_row)
+        new_piece.update_attributes(captured: true)
       else
         piece.update_attributes(column: new_column, row: new_row)
       end
