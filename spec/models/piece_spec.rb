@@ -2,7 +2,15 @@ require 'rails_helper'
 
 RSpec.describe Piece, type: :model do
 
+  player = FactoryBot.create(:player, playername: 'Wayne')
+  game = FactoryBot.create(:game, white_player: player)
+  piece1 = FactoryBot.create(:piece, game: game, row: 2, column: 3, player_color: 1)
+  piece2 = FactoryBot.create(:piece, game: game, row: 2, column: 2, player_color: 0)
+  piece3 = FactoryBot.create(:piece, game: game, row: 3, column: 2, player_color: 1)
+  piece4 = FactoryBot.create(:piece, game: game, row: 3, column: 3, player_color: 0)
+
   describe "a player wants to move his piece" do
+
     it "will move if the piece is in bounds" do
       piece = FactoryBot.build(:piece)
       piece.move(5,4)
@@ -15,6 +23,8 @@ RSpec.describe Piece, type: :model do
       piece.move(5,9)
       expect(piece.row).to eq(2)
       expect(piece.column). to eq(1)
+    end
+
     it 'Should detect vertical obstructions' do
       obstruction = Pieces::Obstruction.call(piece3, column: 2, row: 1)
       expect(obstruction).to eq(true)
@@ -36,13 +46,6 @@ RSpec.describe Piece, type: :model do
       expect(piece.row).to eq(2)
       expect(piece.column).to eq(1)
     end
-
-    player = FactoryBot.create(:player, playername: 'Wayne')
-    game = FactoryBot.create(:game, white_player: player)
-    piece1 = FactoryBot.create(:piece, game: game, row: 2, column: 3, player_color: 1)
-    piece2 = FactoryBot.create(:piece, game: game, row: 2, column: 2, player_color: 0)
-    piece3 = FactoryBot.create(:piece, game: game, row: 3, column: 2, player_color: 1)
-    piece4 = FactoryBot.create(:piece, game: game, row: 3, column: 3, player_color: 0)
 
     context 'attempting to move a piece' do
       it 'Should detect horizontal obstructions' do
@@ -86,5 +89,6 @@ RSpec.describe Piece, type: :model do
         expect(piece1[:row]).to eq(1)
       end
     end
+
   end
 end
