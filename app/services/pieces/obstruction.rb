@@ -54,15 +54,13 @@ module Pieces
       # diagonal going down and right or going up and going left
       if down_right == true
         (row_start...row_end).each do |row|
-          column_delta = row - row_start
-          column = column_start + column_delta
+          column = column_start + (row - row_start)
           return true if game.square_occupied?(column, row)
         end
       # diagonal going down and left or up and right
       else
         (row_start...row_end).each do |row|
-          column_delta = row_start - row
-          column = column_end - 1 + column_delta
+          column = column_end - 1 + (row_start - row)
           return true if game.square_occupied?(column, row)
         end
       end
@@ -70,13 +68,9 @@ module Pieces
     end
 
     def down_right
-      if current_column < new_column && current_row < new_row
-        true
-      elsif current_column > new_column && current_row > new_row
-        true
-      else
-        false
-      end
+      return true if current_column < new_column && current_row < new_row
+      return true if current_column > new_column && current_row > new_row
+      false
     end
   end
 end
