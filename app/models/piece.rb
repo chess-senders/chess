@@ -12,6 +12,14 @@ class Piece < ApplicationRecord
     in_bounds?(new_row, new_col)
   end
 
+  def in_bounds?(new_row, new_col)
+    valid_movement?(8, 1, new_row) && valid_movement?(8, 1, new_col)
+  end
+
+  def valid_movement?(max, min, new_pos)
+    (new_pos <= max) && (new_pos >= min)
+  end
+
   def move_linear(new_row)
     self.row = new_row
   end
@@ -25,11 +33,4 @@ class Piece < ApplicationRecord
     move_lateral(new_col)
   end
 
-  def valid_movement?(max, min, new_pos)
-    (new_pos <= max) && (new_pos >= min)
-  end
-
-  def in_bounds?(new_row, new_col)
-    valid_movement?(8, 1, new_row) && valid_movement?(8, 1, new_col)
-  end
 end
