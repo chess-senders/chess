@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Piece, type: :model do
-
   player = FactoryBot.create(:player, playername: 'Wayne')
   game = FactoryBot.create(:game, white_player: player)
   piece1 = FactoryBot.create(:piece, game: game, row: 2, column: 3, player_color: 1)
@@ -9,29 +8,28 @@ RSpec.describe Piece, type: :model do
   piece3 = FactoryBot.create(:piece, game: game, row: 3, column: 2, player_color: 1)
   piece4 = FactoryBot.create(:piece, game: game, row: 3, column: 3, player_color: 0)
 
-  describe "a player wants to move his piece" do
-    it "will move if the piece is in bounds" do
+  describe 'a player wants to move his piece' do
+    it 'will move if the piece is in bounds' do
       piece = FactoryBot.build(:piece)
-      piece.move(5,4)
+      piece.move(5, 4)
       expect(piece.row).to eq(5)
       expect(piece.column).to eq(4)
     end
 
     it "will not move if the piece's new column is out of bounds" do
       piece = FactoryBot.build(:piece)
-      piece.move(5,9)
+      piece.move(5, 9)
       expect(piece.row).to eq(2)
       expect(piece.column).to eq(1)
     end
 
     it "will not move if the piece's new row is out of bounds" do
       piece = FactoryBot.build(:piece)
-      piece.move(9,4)
+      piece.move(9, 4)
       expect(piece.row).to eq(2)
       expect(piece.column).to eq(1)
     end
   end
-
 
   describe 'A piece checks for obstructions' do
     it 'Should detect vertical obstructions' do
@@ -91,6 +89,5 @@ RSpec.describe Piece, type: :model do
         expect(piece1[:row]).to eq(1)
       end
     end
-
   end
 end

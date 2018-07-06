@@ -2,12 +2,11 @@ class Piece < ApplicationRecord
   belongs_to :game
 
   def move(new_row, new_col)
-    if valid_move?(new_row, new_col)
-      move_diagonal(new_row, new_col)
-    end
+    move_diagonal(new_row, new_col) if valid_move?(new_row, new_col)
   end
 
   protected
+
   def valid_move?(new_row, new_col)
     in_bounds?(new_row, new_col)
   end
@@ -32,5 +31,4 @@ class Piece < ApplicationRecord
     move_linear(new_row)
     move_lateral(new_col)
   end
-
 end

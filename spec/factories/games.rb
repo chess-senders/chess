@@ -1,4 +1,4 @@
-#require_relative 'players'
+# require_relative 'players'
 
 FactoryBot.define do
   factory :game do

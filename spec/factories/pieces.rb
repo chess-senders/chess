@@ -4,7 +4,7 @@ FactoryBot.define do
     player_color nil
     row 2
     column 1
-    type "Pawn"
+    type 'Pawn'
     game_id { FactoryBot.build(:game).id }
   end
 end
