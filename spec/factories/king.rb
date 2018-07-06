@@ -3,8 +3,8 @@ FactoryBot.define do
     captured false
     player_color nil
     row 3
-    column 2
+    column 3
     type 'King'
-    game_id { FactoryBot.build(:game).id }
+    game_id { FactoryBot.build(:game) }
   end
 end
