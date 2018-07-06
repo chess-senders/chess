@@ -15,6 +15,19 @@ RSpec.describe Piece, type: :model do
       piece.move(5,9)
       expect(piece.row).to eq(2)
       expect(piece.column). to eq(1)
+    it 'Should detect vertical obstructions' do
+      obstruction = Pieces::Obstruction.call(piece3, column: 2, row: 1)
+      expect(obstruction).to eq(true)
+    end
+
+    it 'Should detect diagnol obstructions down and right' do
+      obstruction = Pieces::Obstruction.call(piece4, column: 1, row: 1)
+      expect(obstruction).to eq(true)
+    end
+
+    it 'Should detect diagnol obstructions up and right' do
+      obstruction = Pieces::Obstruction.call(piece3, column: 4, row: 1)
+      expect(obstruction).to eq(true)
     end
 
     it "will not move if the piece's new row is out of bounds" do
