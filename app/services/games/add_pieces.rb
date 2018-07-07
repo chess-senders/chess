@@ -52,59 +52,33 @@ module Games
       end
     end
 
+    def piece(player_id, row, col)
+      return { player_color: player_id, row: row, column: col }
+    end
+
     # waiting to get pieces STI to put these in w/ correct types
     def add_rook(player_id, row, col)
-      game.pieces << Piece.create(
-        player_color: player_id,
-        row: row,
-        column: col
-        # type: 2
-      )
+      game.pieces << Rook.create(piece(player_id, row, col))
     end
 
     def add_knight(player_id, row, col)
-      game.pieces << Piece.create(
-        player_color: player_id,
-        row: row,
-        column: col
-        # type: 4
-      )
+      game.pieces << Knight.create(piece(player_id, row, col))
     end
 
     def add_bishop(player_id, row, col)
-      game.pieces << Piece.create(
-        player_color: player_id,
-        row: row,
-        column: col
-        # type: 3
-      )
+      game.pieces << Bishop.create(piece(player_id, row, col))
     end
 
     def add_queen(player_id, row, col)
-      game.pieces << Piece.create(
-        player_color: player_id,
-        row: row,
-        column: col
-        # type: 1
-      )
+      game.pieces << Queen.create(piece(player_id, row, col))
     end
 
     def add_king(player_id, row, col)
-      game.pieces << Piece.create(
-        player_color: player_id,
-        row: row,
-        column: col
-        # type: 0
-      )
+      game.pieces << King.create(piece(player_id, row, col))
     end
 
     def add_pawn(player_id, row, col)
-      game.pieces << Piece.create(
-        player_color: player_id,
-        row: row,
-        column: col
-        # type: 5
-      )
+      game.pieces << Pawn.create(piece(player_id, row, col))
     end
 
     private
