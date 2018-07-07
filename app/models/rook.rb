@@ -3,7 +3,6 @@ class Rook < Piece
     super &&
       valid_movement?(7, -7, new_row - row) &&
       valid_movement?(7, -7, new_col - column)
-    return true if new_row == row
-    return true if new_col == column
+    return true if new_row == row || new_col == column
   end
 end
