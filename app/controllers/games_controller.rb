@@ -1,5 +1,7 @@
 class GamesController < ApplicationController
   before_action :authenticate_player!
+  helper_method :current_game
+  helper_method :render_piece
 
   def index
     @games = Game.where('white_player_id != ?', current_player.id)
@@ -20,8 +22,7 @@ class GamesController < ApplicationController
 
   def show
     current_game
-    @y_range = (1..8).to_a
-    @x_range = (1..8).to_a
+    @grid = multidimensional_grid(current_game.pieces)
   end
 
   def update
@@ -35,20 +36,26 @@ class GamesController < ApplicationController
 
   private
 
-  helper_method :render_piece
-  def render_piece(x, y)
-    @piece = current_game.piece.where(:row => x, :column => y)
-    if @piece != nil
-      @piece_text = "#{@piece.player_color} #{@piece.type}"
+  def multidimensional_grid(pieces)
+    grid = []
+    (1..8).each do |row|
+      grid_row = []
+      (1..8).each do |col|
+        piece = pieces.select { |piece| piece.row == row && piece.column == col }
+        if !piece.first.nil?
+          grid_row << piece.first
+        else
+          grid_row << nil
+        end
+      end
+      grid << grid_row
     end
+    grid
   end
 
-  helper_method :current_game
   def current_game
     @current_game ||= Game.find(params[:id])
   end
-
-  helper_method :current_game
 
   def game_params
     params.require(:game).permit(:name)

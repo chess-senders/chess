@@ -1,10 +1,14 @@
 <h1><%= current_game.name %></h1>
 <br/>
 <table class='chessboard'>
-	<% @y_range.each do |y|%>
-		<tr id='row <%= y %>'>
-			<% @x_range.each do |x| %>
-				<td id='column <%= x %>'><% render_piece(x,y) %></td>
+	<% @grid.each_with_index do |row, y| %>
+		<tr id='row <%= y + 1 %>'>
+			<% row.each_with_index do |piece, x| %>
+				<td id='column <%= x + 1 %>'>
+          <% if !piece.nil? %>
+            <%= piece.player_color %> <%= piece.type %>
+          <% end %>    
+        </td>
 			<% end %>
 		</tr>
 	<% end %>
