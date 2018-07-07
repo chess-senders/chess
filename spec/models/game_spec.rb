@@ -40,7 +40,7 @@ RSpec.describe Game, type: :model do
       expect(black_pieces.count).to eq(0)
     end
 
-    it "should only add black pieces when a 2nd player joins" do
+    it 'should only add black pieces when a 2nd player joins' do
       white_player = FactoryBot.create(:player, playername: 'Wayne')
       game = FactoryBot.create(
         :game,

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Games
   class AddPieces < ApplicationService
     def initialize(game)
@@ -13,10 +15,9 @@ module Games
       end
 
       # in case we're waiting on the second player
-      if black_player_id
-        unless game.pieces.find_by_player_color(black_player_id)
-          add_black_pieces
-        end
+      return unless black_player_id
+      unless game.pieces.find_by_player_color(black_player_id)
+        add_black_pieces
       end
     end
 
