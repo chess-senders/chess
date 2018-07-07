@@ -6,7 +6,12 @@
 			<% row.each_with_index do |piece, x| %>
 				<td id='column <%= x + 1 %>'>
           <% if !piece.nil? %>
-            <%= piece.player_color %> <%= piece.type %>
+            <% if piece.player_color == current_game.white_player_id %>
+              White
+            <% elsif piece.player_color == current_game.black_player_id %>
+              Black
+            <% end %>
+            <%= piece.type %>
           <% end %>    
         </td>
 			<% end %>
