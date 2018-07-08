@@ -30,6 +30,7 @@ class GamesController < ApplicationController
     @game = Game.find(params[:id])
     if @game.valid? && current_player != @game.white_player
       @game.update(black_player: current_player, state: 1)
+      @game.add_pieces_to_board
       redirect_to game_path(@game)
     else
       render :new, status: :unprocessable_entity
@@ -40,9 +41,9 @@ class GamesController < ApplicationController
 
   def multidimensional_grid(pieces)
     grid = []
-    (1..8).each do |row|
+    (0..7).each do |row|
       grid_row = []
-      (1..8).each do |col|
+      (0..7).each do |col|
         space = pieces.select { |piece| piece.row == row && piece.column == col }
         grid_row << space.first
       end
