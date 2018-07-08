@@ -30,6 +30,7 @@ class GamesController < ApplicationController
     @game = Game.find(params[:id])
     if @game.valid? && current_player != @game.white_player
       @game.update(black_player: current_player, state: 1)
+      redirect_to game_path(@game)
     else
       render :new, status: :unprocessable_entity
     end
