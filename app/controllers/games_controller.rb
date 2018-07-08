@@ -41,12 +41,8 @@ class GamesController < ApplicationController
     (1..8).each do |row|
       grid_row = []
       (1..8).each do |col|
-        piece = pieces.select { |piece| piece.row == row && piece.column == col }
-        if !piece.first.nil?
-          grid_row << piece.first
-        else
-          grid_row << nil
-        end
+        space = pieces.select { |piece| piece.row == row && piece.column == col }
+        grid_row << space.first
       end
       grid << grid_row
     end
