@@ -3,8 +3,8 @@ class Knight < Piece
 
 
   def default_pic
-    self.picture = "../images/whiteknight.png" if self.row == 0
-    self.picture = "../images/blackknight.png" if self.row == 7
+    self.picture = "whiteknight.png" if self.row == 0
+    self.picture = "blackknight.png" if self.row == 7
   end
 
 end

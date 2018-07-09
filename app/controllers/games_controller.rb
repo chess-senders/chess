@@ -5,7 +5,9 @@ class GamesController < ApplicationController
 
   def index
     #@games = Game.where('white_player_id != ?', current_player.id)
-    @games = Game.where(black_player_id: nil)
+    #@games = Game.where(black_player_id: nil) list games waiting for black player
+    @games = Game.all
+    puts @games
   end
 
   def new

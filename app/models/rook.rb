@@ -3,8 +3,8 @@ class Rook < Piece
 
 
   def default_pic
-    self.picture = "../images/whiterook.png" if self.row == 0
-    self.picture = "../images/blackrook.png" if self.row == 7
+    self.picture = "whiterook.png" if self.row == 0
+    self.picture = "blackrook.png" if self.row == 7
   end
 
 end

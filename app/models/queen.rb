@@ -3,8 +3,8 @@ class Queen < Piece
 
 
   def default_pic
-    self.picture = "../images/whitequeen.png" if self.row == 0
-    self.picture = "../images/blackqueen.png" if self.row == 7
+    self.picture = "whitequeen.png" if self.row == 0
+    self.picture = "blackqueen.png" if self.row == 7
   end
 
 end

@@ -1,10 +1,18 @@
 <h1>List of Available Games</h1>
 <br/>
 
+<!--
 <div>
   <% @games.available.each do |game| %>
       <p><%= link_to game.name, game_path(game), :method=> :put %></p>
   <% end %>
 </div>
+-->
 
+<!--for development purposes -->
+<div>
+  <% @games.each do |game| %>
+      <p><%= link_to game.name, game_path(game), :method=> :put %></p>
+  <% end %>
+</div>
 <button><%= link_to 'Create a new game', new_game_path %></button>
