@@ -22,7 +22,7 @@ class GamesController < ApplicationController
 
   def show
     @game = current_game
-    @grid = multidimensional_grid(@game.pieces)
+    @grid = render_chessboard(@game.pieces)
   end
 
   def update
@@ -38,7 +38,7 @@ class GamesController < ApplicationController
 
   private
 
-  def multidimensional_grid(pieces)
+  def render_chessboard(pieces)
     grid = []
     (0..7).each do |row|
       grid_row = []
