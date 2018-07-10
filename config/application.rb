@@ -18,7 +18,7 @@ Bundler.require(*Rails.groups)
 
 module Chess
   class Application < Rails::Application
-    config.paths.add File.join('app', 'services'), glob: File.join('**', '*.rb')
-    config.autoload_paths += Dir[Rails.root.join('app', 'services', '*')]
+    config.paths.add File.join('app', 'services', 'decorators'), glob: File.join('**', '*.rb')
+    config.autoload_paths += Dir[Rails.root.join('app', 'services', 'decorators', '*')]
   end
 end
