@@ -8,7 +8,8 @@
 			<% row.each_with_index do |piece, x| %>
 				<td id='column <%= x %>'>
           <% if !piece.nil? %>
-					<%= link_to class: 'piece' %>
+					<%= link_to "#{ Pieces::Color.call(piece) } #{ piece.type }", class: 'piece' %>
+					<% end %>
         </td>
 			<% end %>
 		</tr>

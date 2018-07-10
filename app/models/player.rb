@@ -18,4 +18,5 @@ class Player < ApplicationRecord
   end
 
   has_many :games
+  has_many :pieces
 end
