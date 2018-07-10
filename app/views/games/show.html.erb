@@ -1,14 +1,17 @@
-<h1><%= current_game.name %></h1>
+<h1><%= @game.name %></h1>
 
 <h4><%= @game.state %></h4>
 
 <table class='chessboard'>
-	<% @grid.each_with_index do |row, y| %>
+	<% @chess_board.each_with_index do |row, y| %>
 		<tr id='row <%= y %>'>
 			<% row.each_with_index do |piece, x| %>
-				<td id='column <%= x %>'>
+				<td id='column <%= x %>' class='<%= 'active' if piece == @current_piece %>'>
           <% if !piece.nil? %>
-					<%= link_to "#{ Pieces::Color.call(piece) } #{ piece.type }", class: 'piece' %>
+					<%= link_to "#{ Pieces::Color.call(piece) } #{ piece.type }",
+						piece_path(piece),
+						class: "piece"
+					%>
 					<% end %>
         </td>
 			<% end %>

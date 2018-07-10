@@ -22,7 +22,7 @@ class GamesController < ApplicationController
 
   def show
     @game = current_game
-    @grid = render_chessboard(@game.pieces)
+    @chess_board = Games::RenderChessboard.call(@game.pieces)
   end
 
   def update
@@ -37,19 +37,6 @@ class GamesController < ApplicationController
   end
 
   private
-
-  def render_chessboard(pieces)
-    grid = []
-    (0..7).each do |row|
-      grid_row = []
-      (0..7).each do |col|
-        space = pieces.select { |piece| piece.row == row && piece.column == col }
-        grid_row << space.first
-      end
-      grid << grid_row
-    end
-    grid
-  end
 
   def current_game
     @current_game ||= Game.find(params[:id])
