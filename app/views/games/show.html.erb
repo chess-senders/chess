@@ -1,18 +1,23 @@
 <h1><%= current_game.name %></h1>
-<br/>
+
+<h4><%= @game.state %></h4>
+
 <table class='chessboard'>
 	<% @grid.each_with_index do |row, y| %>
-		<tr id='row <%= y + 1 %>'>
+		<tr id='row <%= y %>'>
 			<% row.each_with_index do |piece, x| %>
-				<td id='column <%= x + 1 %>'>
+				<td id='column <%= x %>'>
           <% if !piece.nil? %>
-            <% if piece.player_color == current_game.white_player_id %>
-              White
-            <% elsif piece.player_color == current_game.black_player_id %>
-              Black
-            <% end %>
-            <%= piece.type %>
-          <% end %>    
+						<p class='piece'>
+	            <% if piece.player_color == current_game.white_player_id %>
+	              White
+	            <% elsif piece.player_color == current_game.black_player_id %>
+	              Black
+	            <% end %>
+							<br>
+	            <%= piece.type %>
+						</p>
+	        <% end %>
         </td>
 			<% end %>
 		</tr>
