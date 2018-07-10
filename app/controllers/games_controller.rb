@@ -14,6 +14,7 @@ class GamesController < ApplicationController
   def create
     @game = Game.create(game_params.merge(white_player: current_player))
     if @game.valid?
+      # @game.add_pieces_to_board
       redirect_to game_path(@game)
     else
       render :new, status: :unprocessable_entity
