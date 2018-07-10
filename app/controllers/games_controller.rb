@@ -1,5 +1,7 @@
 class GamesController < ApplicationController
   before_action :authenticate_player!
+  helper_method :current_game
+  helper_method :render_piece
 
   def index
     @games = Game.where('white_player_id != ?', current_player.id)
@@ -19,19 +21,39 @@ class GamesController < ApplicationController
   end
 
   def show
-    @game = Game.find(params[:id])
+    @game = current_game
+    @grid = render_chessboard(@game.pieces)
   end
 
   def update
     @game = Game.find(params[:id])
     if @game.valid? && current_player != @game.white_player
       @game.update(black_player: current_player, state: 1)
+      @game.add_pieces_to_board
+      redirect_to game_path(@game)
     else
       render :new, status: :unprocessable_entity
     end
   end
 
   private
+
+  def render_chessboard(pieces)
+    grid = []
+    (0..7).each do |row|
+      grid_row = []
+      (0..7).each do |col|
+        space = pieces.select { |piece| piece.row == row && piece.column == col }
+        grid_row << space.first
+      end
+      grid << grid_row
+    end
+    grid
+  end
+
+  def current_game
+    @current_game ||= Game.find(params[:id])
+  end
 
   def game_params
     params.require(:game).permit(:name)

@@ -1,5 +1,10 @@
 <h1>List of Games</h1>
-<br/>
-<% @games.available.each do |game| %>
-    <p><%= link_to game.name, game_path(game), :method=> :put %></p>
-<% end %>
+
+<ul>
+  <% @games.available.each do |game| %>
+    <li>
+      <h4><%= game.name %></h4>
+      <%= button_to 'Join Game', game_path(game), :method=> :put %>
+    </li>
+  <% end %>
+</ul>
