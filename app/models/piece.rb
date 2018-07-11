@@ -6,6 +6,10 @@ class Piece < ApplicationRecord
     Pieces::MoveTo.call(self, row: new_row, column: new_col) if valid_move?(new_row, new_col)
   end
 
+  def color
+    Pieces::Color.call(self)
+  end
+
   protected
 
   def valid_move?(new_row, new_col)
