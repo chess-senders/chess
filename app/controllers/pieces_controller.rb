@@ -1,15 +1,32 @@
 class PiecesController < ApplicationController
   def show
-    @current_piece = Piece.find(params[:id])
-    @game = @current_piece.game
+    @piece = current_piece
+    @game = @piece.game
     @chess_board = Games::RenderChessboard.call(@game.pieces)
-    render template: 'games/show'
+  end
+
+  def update
+    @piece = current_piece
+    @game = @piece.game
+    if current_player != @piece.player
+      return redirect_to game_path(@game)
+    end
+    @piece.update_attributes(update_piece_params)
+    if @piece.valid?
+      redirect_to game_path(@game)
+    else
+      return render_status(:unprocessable_entity)
+    end
   end
 
   private
 
-  def piece_params
-    params.require(:piece).permit(:id)
+  def update_piece_params
+    params.permit(:row, :column, :id)
+  end
+
+  def current_piece
+    @piece || Piece.find(params[:id])
   end
 
 end
