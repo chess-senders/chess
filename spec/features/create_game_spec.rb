@@ -6,7 +6,7 @@ feature 'A player creates a game' do
     player = FactoryBot.create(:player, playername: 'Wayne')
     game = FactoryBot.create(:game, white_player: player)
     sign_in(player)
-    click_link('Create a Game')
+    click_link('Create Game')
     visit '/games/new'
     fill_in('Game name', with: game.name)
     click_button('create!')
