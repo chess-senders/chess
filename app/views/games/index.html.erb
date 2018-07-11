@@ -3,7 +3,7 @@
 <ul>
   <% @games.available.each do |game| %>
     <li>
-      <h4><%= game.name %></h4>
+      <h4><%= game.white_player.playername %> - <%= game.name %></h4>
       <%= button_to 'Join Game', game_path(game), :method=> :put %>
     </li>
   <% end %>

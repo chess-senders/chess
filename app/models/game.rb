@@ -3,7 +3,7 @@ class Game < ApplicationRecord
 
   belongs_to :white_player, class_name: :Player
   belongs_to :black_player, class_name: :Player, optional: true
-  has_many :pieces, :dependent => :delete_all
+  has_many :pieces, dependent: :delete_all
   scope :available, -> { where(state: 0) }
 
   enum state: [
