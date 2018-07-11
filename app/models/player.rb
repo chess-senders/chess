@@ -17,6 +17,6 @@ class Player < ApplicationRecord
     end
   end
 
-  has_many :games
-  has_many :pieces
+  has_many :games, :dependent => :delete_all
+  has_many :pieces, :dependent => :delete_all
 end
