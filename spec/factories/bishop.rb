@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :bishop do
     captured false
-    player_color nil
+    player nil
     row 1
     column 7
     type 'Bishop'

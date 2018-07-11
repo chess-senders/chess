@@ -7,17 +7,16 @@ module Games
     end
 
     def call
-        grid = []
-        (0..7).each do |row|
-          grid_row = []
-          (0..7).each do |col|
-            space = pieces.select { |piece| piece.row == row && piece.column == col }
-            grid_row << space.first
-          end
-          grid << grid_row
+      grid = []
+      (0..7).each do |row|
+        grid_row = []
+        (0..7).each do |col|
+          space = pieces.select { |piece| piece.row == row && piece.column == col }
+          grid_row << space.first
         end
-        grid
+        grid << grid_row
+      end
+      grid
     end
-
   end
 end

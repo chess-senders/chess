@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :piece do
     captured false
-    player_color nil
+    player nil
     row 1
     column 1
     type 'Pawn'
