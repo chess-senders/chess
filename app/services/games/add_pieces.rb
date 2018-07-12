@@ -10,15 +10,11 @@ module Games
 
     def call
       # only add if there aren't pieces already
-      unless game.pieces.find_by_player_color(white_player_id)
-        add_white_pieces
-      end
+      add_white_pieces unless game.pieces.find_by_player_color(white_player_id)
 
       # in case we're waiting on the second player
       return unless black_player_id
-      unless game.pieces.find_by_player_color(black_player_id)
-        add_black_pieces
-      end
+      add_black_pieces unless game.pieces.find_by_player_color(black_player_id)
     end
 
     def add_white_pieces
@@ -53,7 +49,7 @@ module Games
     end
 
     def piece(player_id, row, col)
-      return { player_color: player_id, row: row, column: col }
+      { player_color: player_id, row: row, column: col }
     end
 
     # waiting to get pieces STI to put these in w/ correct types
