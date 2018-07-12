@@ -25,4 +25,13 @@ class Game < ApplicationRecord
   def add_pieces_to_board
     Games::AddPieces.call(self)
   end
+
+  def check?(color)
+    king = pieces.where(player_color: color, type: 'King').first
+    opponent_pieces = pieces.where.not(player_color: color)
+    opponent_pieces.each do |piece|
+      return true if piece.valid_move?(king.row, king.column)
+    end
+    false
+  end
 end
