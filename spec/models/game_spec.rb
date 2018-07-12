@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Game, type: :model do
-<<<<<<< HEAD
   describe 'validations' do
     it 'is not valid without a white player' do
       expect { FactoryBot.create(:game, white_player: nil) }.to raise_error(
