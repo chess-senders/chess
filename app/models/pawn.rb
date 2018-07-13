@@ -5,7 +5,11 @@ class Pawn < Piece
 
     super &&
       ( moving_forward? || capturing_piece? ) &&
-      valid_movement?(1, 1, rows_moved)
+      if moved
+        valid_movement?(1, 1, rows_moved)
+      else
+        valid_movement?(2, 1, rows_moved)
+      end
   end
 
   private
