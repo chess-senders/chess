@@ -10,8 +10,8 @@ RSpec.describe Pawn, type: :model do
     black_player: b_player
   )
 
-  describe 'a pawn tries to move position' do
-    it 'moves one row forward for white player' do
+  describe 'a pawn tries to move' do
+    it 'one row forward for white player' do
       pawn = FactoryBot.create(
         :pawn,
         game: game,
@@ -23,7 +23,7 @@ RSpec.describe Pawn, type: :model do
       expect(pawn.column).to eq(1)
     end
 
-    it 'moves one row forward for white player' do
+    it 'one row forward for black player' do
       pawn = FactoryBot.create(
         :pawn,
         game: game,
@@ -35,7 +35,7 @@ RSpec.describe Pawn, type: :model do
       expect(pawn.column).to eq(1)
     end
 
-    it 'tries to make an invalid move, moving by columns' do
+    it 'makes an invalid move, moving by columns' do
       pawn = FactoryBot.create(:pawn, game: game)
       pawn.move(7, 2)
       expect(pawn.row).to eq(7)
@@ -43,7 +43,7 @@ RSpec.describe Pawn, type: :model do
     end
 
     context 'after the first move' do
-      it 'tries to make an invalid move, moving 2 rows' do
+      it 'makes an invalid move, moving 2 rows' do
         pawn = FactoryBot.create(:pawn, game: game)
         pawn.move(5, 1)
         expect(pawn.row).to eq(7)
