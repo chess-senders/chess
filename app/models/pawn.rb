@@ -4,11 +4,16 @@ class Pawn < Piece
     @new_col = new_col
 
     super &&
+      destination_free? &&
       valid_movement?(0, 0, @new_col - column) &&
       valid_movement?(1, 1, rows_moved)
   end
 
   private
+
+  def destination_free?
+    ! game.square_occupied?(@new_col, @new_row)
+  end
 
   def rows_moved
     # forward movement only
