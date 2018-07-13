@@ -35,6 +35,18 @@ RSpec.describe Pawn, type: :model do
       expect(pawn.column).to eq(1)
     end
 
+    it 'makes an invalid move, moving backwards' do
+      pawn = FactoryBot.create(
+        :pawn,
+        game: game,
+        player_color: b_player.id,
+        row: 6
+      )
+      pawn.move(7, 1)
+      expect(pawn.row).to eq(6)
+      expect(pawn.column).to eq(1)
+    end
+
     it 'makes an invalid move, moving by columns' do
       pawn = FactoryBot.create(:pawn, game: game)
       pawn.move(7, 2)

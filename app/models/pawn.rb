@@ -9,9 +9,10 @@ class Pawn < Piece
 
   def valid_move?(new_row, new_col)
     @new_row = new_row
+    @new_col = new_col
 
     super &&
-      valid_movement?(0, 0, new_col - column) &&
+      valid_movement?(0, 0, @new_col - column) &&
       valid_movement?(1, 1, rows_moved)
   end
 
