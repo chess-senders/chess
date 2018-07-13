@@ -4,7 +4,7 @@ class Pawn < Piece
     @new_col = new_col
 
     super &&
-      ( moving_forward? || capturing_piece? ) && valid_forward_move?
+      (moving_forward? || capturing_piece?) && valid_forward_move?
   end
 
   private
@@ -18,9 +18,7 @@ class Pawn < Piece
   end
 
   def capturing_piece?
-    moving_sideways? &&
-    ! square_free? &&
-    valid_movement?(1, 1, cols_moved)
+    moving_sideways? && !square_free? && valid_movement?(1, 1, cols_moved)
   end
 
   def moving_sideways?
@@ -36,15 +34,15 @@ class Pawn < Piece
   end
 
   def square_free?
-    ! game.square_occupied?(@new_col, @new_row)
+    !game.square_occupied?(@new_col, @new_row)
   end
 
   def rows_moved
     # forward movement only
-    is_white_player? ? @new_row - row : row - @new_row
+    white_player? ? @new_row - row : row - @new_row
   end
 
-  def is_white_player?
+  def white_player?
     game.white_player_id == player_color
   end
 end
