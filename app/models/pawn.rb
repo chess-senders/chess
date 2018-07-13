@@ -12,15 +12,18 @@ class Pawn < Piece
     @new_col = new_col
 
     super &&
-      ( moving_forward? || capturing_piece? ) &&
-      if moved
-        valid_movement?(1, 1, rows_moved)
-      else
-        valid_movement?(2, 1, rows_moved)
-      end
+      ( moving_forward? || capturing_piece? ) && valid_forward_move?
   end
 
   private
+
+  def valid_forward_move?
+    if moved
+      valid_movement?(1, 1, rows_moved)
+    else
+      valid_movement?(2, 1, rows_moved)
+    end
+  end
 
   def capturing_piece?
     moving_sideways? &&
