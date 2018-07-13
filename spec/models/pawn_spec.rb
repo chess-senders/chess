@@ -70,6 +70,23 @@ RSpec.describe Pawn, type: :model do
         expect(pawn_to_move.row).to eq(6)
         expect(pawn_to_move.column).to eq(2)
       end
+
+      context 'as the first move' do
+        it 'by moving 2 rows' do
+          w_player = FactoryBot.create(:player, playername: 'Wayne')
+          b_player = FactoryBot.create(:player, playername: 'John')
+          game = FactoryBot.create(
+            :game,
+            white_player: w_player,
+            black_player: b_player
+          )
+
+          pawn = FactoryBot.create(:pawn, game: game)
+          pawn.move(5, 1)
+          expect(pawn.row).to eq(5)
+          expect(pawn.column).to eq(1)
+        end
+      end
     end
 
     context 'in an invalid direction' do
@@ -123,22 +140,23 @@ RSpec.describe Pawn, type: :model do
         expect(pawn_to_move.row).to eq(7)
         expect(pawn_to_move.column).to eq(1)
       end
-    end
 
-    context 'after the first move' do
-      it 'makes an invalid move, moving 2 rows' do
-        w_player = FactoryBot.create(:player, playername: 'Wayne')
-        b_player = FactoryBot.create(:player, playername: 'John')
-        game = FactoryBot.create(
-          :game,
-          white_player: w_player,
-          black_player: b_player
-        )
+      context 'after the first move' do
+        it 'by moving 2 rows' do
+          w_player = FactoryBot.create(:player, playername: 'Wayne')
+          b_player = FactoryBot.create(:player, playername: 'John')
+          game = FactoryBot.create(
+            :game,
+            white_player: w_player,
+            black_player: b_player
+          )
 
-        pawn = FactoryBot.create(:pawn, game: game)
-        pawn.move(5, 1)
-        expect(pawn.row).to eq(7)
-        expect(pawn.column).to eq(1)
+          pawn = FactoryBot.create(:pawn, game: game)
+          pawn.move(6, 1)
+          pawn.move(4, 1)
+          expect(pawn.row).to eq(6)
+          expect(pawn.column).to eq(1)
+        end
       end
     end
   end
