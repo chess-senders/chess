@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Pawn < Piece
   before_save :default_pic
 
