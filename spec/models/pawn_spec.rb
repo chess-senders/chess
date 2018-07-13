@@ -1,18 +1,17 @@
 require 'rails_helper'
 
 RSpec.describe Pawn, type: :model do
-  w_player = FactoryBot.create(:player, playername: 'Wayne')
-  b_player = FactoryBot.create(:player, playername: 'John')
-
-  game = FactoryBot.create(
-    :game,
-    white_player: w_player,
-    black_player: b_player
-  )
-
   describe 'a pawn tries to move' do
     context 'in a valid direction' do
       it 'one row forward for white player' do
+        w_player = FactoryBot.create(:player, playername: 'Wayne')
+        b_player = FactoryBot.create(:player, playername: 'John')
+        game = FactoryBot.create(
+          :game,
+          white_player: w_player,
+          black_player: b_player
+        )
+
         pawn = FactoryBot.create(
           :pawn,
           game: game,
@@ -25,6 +24,14 @@ RSpec.describe Pawn, type: :model do
       end
 
       it 'one row forward for black player' do
+        w_player = FactoryBot.create(:player, playername: 'Wayne')
+        b_player = FactoryBot.create(:player, playername: 'John')
+        game = FactoryBot.create(
+          :game,
+          white_player: w_player,
+          black_player: b_player
+        )
+
         pawn = FactoryBot.create(
           :pawn,
           game: game,
@@ -39,6 +46,14 @@ RSpec.describe Pawn, type: :model do
 
     context 'in an invalid direction' do
       it 'by moving backwards' do
+        w_player = FactoryBot.create(:player, playername: 'Wayne')
+        b_player = FactoryBot.create(:player, playername: 'John')
+        game = FactoryBot.create(
+          :game,
+          white_player: w_player,
+          black_player: b_player
+        )
+
         pawn = FactoryBot.create(
           :pawn,
           game: game,
@@ -51,15 +66,47 @@ RSpec.describe Pawn, type: :model do
       end
 
       it 'by moving sideways' do
+        w_player = FactoryBot.create(:player, playername: 'Wayne')
+        b_player = FactoryBot.create(:player, playername: 'John')
+        game = FactoryBot.create(
+          :game,
+          white_player: w_player,
+          black_player: b_player
+        )
+
         pawn = FactoryBot.create(:pawn, game: game)
         pawn.move(7, 2)
         expect(pawn.row).to eq(7)
         expect(pawn.column).to eq(1)
       end
+
+      it 'by moving to an occupied square' do
+        w_player = FactoryBot.create(:player, playername: 'Wayne')
+        b_player = FactoryBot.create(:player, playername: 'John')
+        game = FactoryBot.create(
+          :game,
+          white_player: w_player,
+          black_player: b_player
+        )
+
+        pawn_to_move = FactoryBot.create(:pawn, game: game)
+        pawn_in_space = FactoryBot.create(:pawn, game: game, row: 6)
+        pawn_to_move.move(6, 1)
+        expect(pawn_to_move.row).to eq(7)
+        expect(pawn_to_move.column).to eq(1)
+      end
     end
 
     context 'after the first move' do
       it 'makes an invalid move, moving 2 rows' do
+        w_player = FactoryBot.create(:player, playername: 'Wayne')
+        b_player = FactoryBot.create(:player, playername: 'John')
+        game = FactoryBot.create(
+          :game,
+          white_player: w_player,
+          black_player: b_player
+        )
+
         pawn = FactoryBot.create(:pawn, game: game)
         pawn.move(5, 1)
         expect(pawn.row).to eq(7)
