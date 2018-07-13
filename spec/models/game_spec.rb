@@ -62,9 +62,9 @@ RSpec.describe Game, type: :model do
   white_player = FactoryBot.create(:player)
   black_player = FactoryBot.create(:player)
   game = FactoryBot.create(:game, state: 1, white_player: white_player, black_player: black_player)
-  FactoryBot.create(:piece, player_color: white_player.id, row: 1, column: 1, type: 'King',
+  FactoryBot.create(:piece, player: white_player, row: 1, column: 1, type: 'King',
                             game: game)
-  black_piece = FactoryBot.create(:piece, player_color: black_player.id, row: 1, column: 2,
+  black_piece = FactoryBot.create(:piece, player: black_player, row: 1, column: 2,
                                           type: 'King', game: game)
 
   describe 'white players turn' do

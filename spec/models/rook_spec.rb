@@ -6,21 +6,21 @@ RSpec.describe Rook, type: :model do
 
   describe 'a rook tries to move position' do
     it 'Moves to a new row' do
-      rook = FactoryBot.create(:rook, game: game)
+      rook = FactoryBot.create(:rook, game: game, player: player)
       rook.move(1, 8)
       expect(rook.row).to eq(1)
       expect(rook.column).to eq(8)
     end
 
     it 'Moves to a new column' do
-      rook = FactoryBot.create(:rook, game: game)
+      rook = FactoryBot.create(:rook, game: game, player: player)
       rook.move(8, 1)
       expect(rook.row).to eq(8)
       expect(rook.column).to eq(1)
     end
 
     it 'tries to make an invalid move' do
-      rook = FactoryBot.build(:rook)
+      rook = FactoryBot.build(:rook, player: player)
       rook.move(5, 5)
       expect(rook.row).to eq(8)
       expect(rook.column).to eq(8)
