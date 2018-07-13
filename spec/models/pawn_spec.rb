@@ -11,10 +11,15 @@ RSpec.describe Pawn, type: :model do
   )
 
   describe 'a pawn tries to move position' do
-    it 'moves one row forward' do
-      pawn = FactoryBot.create(:pawn, game: game)
-      pawn.move(6, 1)
-      expect(pawn.row).to eq(6)
+    it 'moves one row forward for white player' do
+      pawn = FactoryBot.create(
+        :pawn,
+        game: game,
+        player_color: w_player.id,
+        row: 1
+      )
+      pawn.move(2, 1)
+      expect(pawn.row).to eq(2)
       expect(pawn.column).to eq(1)
     end
 
