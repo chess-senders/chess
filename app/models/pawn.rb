@@ -14,6 +14,8 @@ class Pawn < Piece
       # forward movement only
       if game.white_player_id == player_color
         valid_movement?(1, 1, new_row - row)
+      else
+        valid_movement?(1, 1, row - new_row)
       end
   end
 end
