@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'rails_helper'
 
 RSpec.describe Pawn, type: :model do
@@ -53,7 +54,7 @@ RSpec.describe Pawn, type: :model do
           player_color: b_player.id
         )
 
-        pawn_to_capture = FactoryBot.create(
+        FactoryBot.create(
           :pawn,
           game: game,
           row: 6,
@@ -123,11 +124,12 @@ RSpec.describe Pawn, type: :model do
           game: game,
           player_color: b_player.id
         )
-        pawn_in_space = FactoryBot.create(
+        FactoryBot.create(
           :pawn,
           game: game,
           row: 6,
-          player_color: w_player.id)
+          player_color: w_player.id
+        )
 
         pawn_to_move.move(6, 1)
         expect(pawn_to_move.row).to eq(7)
