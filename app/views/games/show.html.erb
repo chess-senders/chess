@@ -8,6 +8,13 @@
           <% if !piece.nil? %>
 						<%= image_tag piece.picture %>
           <% end %>
+            <% if piece.player_color == current_game.white_player_id %>
+              White
+            <% elsif piece.player_color == current_game.black_player_id %>
+              Black
+            <% end %>
+            <%= piece.type %>
+          <% end %>    
         </td>
 			<% end %>
 		</tr>
