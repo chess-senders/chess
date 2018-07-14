@@ -9,14 +9,19 @@
   </head>
 
   <body>
+
     <header>
+      <%= link_to 'Home', root_path %>
       <% if player_signed_in? %>
         <%= link_to 'Sign Out', destroy_player_session_path, method: :delete %>
       <% else %>
         <%= link_to "Sign in with Facebook", player_facebook_omniauth_authorize_path %>
         <%= link_to "Sign in with Google", player_google_oauth2_omniauth_authorize_path %>
+        <%= link_to 'Sign In', new_player_session_path %>
+        <%= link_to 'Sign Up', new_player_registration_path %>
       <% end %>
     </header>
+
     <% if notice.present? %>
       <p class="alert alert-info text-center"><%= notice %></p>
     <% end %>
