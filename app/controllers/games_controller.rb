@@ -4,7 +4,10 @@ class GamesController < ApplicationController
   helper_method :render_piece
 
   def index
-    @games = Game.where('white_player_id != ?', current_player.id)
+    #@games = Game.where('white_player_id != ?', current_player.id)
+    #@games = Game.where(black_player_id: nil) list games waiting for black player
+    @games = Game.all
+    puts @games
   end
 
   def new
@@ -37,6 +40,19 @@ class GamesController < ApplicationController
   end
 
   private
+
+  def multidimensional_grid(pieces)
+    grid = []
+    (0..7).each do |row|
+      grid_row = []
+      (0..7).each do |col|
+        space = pieces.select { |piece| piece.row == row && piece.column == col }
+        grid_row << space.first
+      end
+      grid << grid_row
+    end
+    grid
+  end
 
   def current_game
     @current_game ||= Game.find(params[:id])

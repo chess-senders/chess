@@ -11,11 +11,11 @@
 						<%= link_to_if Pieces::Disabled.call(piece),
 							"#{ piece.color } #{ piece.type }",
 							piece_path(piece),
-							class: "piece"
-						%>
+							class: "piece"%>
+								<%=image_tag piece.picture %>
+						<% end %>
 					<% end %>
+          <% end %>
         </td>
-			<% end %>
 		</tr>
-	<% end %>
 </table>

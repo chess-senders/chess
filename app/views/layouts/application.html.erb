@@ -9,6 +9,7 @@
   </head>
 
   <body>
+
     <header>
       <nav id='primary_navigation'>
         <% if player_signed_in? %>
@@ -24,6 +25,7 @@
         <% end %>
       </nav>
     </header>
+
     <% if notice.present? %>
       <p class="alert alert-info text-center"><%= notice %></p>
     <% end %>
