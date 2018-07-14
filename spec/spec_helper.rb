@@ -29,12 +29,15 @@ RSpec.configure do |config|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
   end
 
-  config.after(:each) do
+  config.before(:suite) do
     DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with(:truncation)
   end
 
-  config.after(:suite) do
-    DatabaseCleaner.clean_with(:truncation)
+  config.around(:each) do |example|
+    DatabaseCleaner.cleaning do
+      example.run
+    end
   end
 
   # rspec-mocks config goes here. You can use an alternate test double

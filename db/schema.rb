@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180706102358) do
+ActiveRecord::Schema.define(version: 20180710124720) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,14 +27,16 @@ ActiveRecord::Schema.define(version: 20180706102358) do
 
   create_table "pieces", force: :cascade do |t|
     t.boolean  "captured"
-    t.integer  "player_color"
     t.integer  "row"
     t.integer  "column"
     t.integer  "game_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string   "type"
+    t.string   "picture"
+    t.integer  "player_id"
     t.index ["game_id"], name: "index_pieces_on_game_id", using: :btree
+    t.index ["player_id"], name: "index_pieces_on_player_id", using: :btree
   end
 
   create_table "players", force: :cascade do |t|
@@ -53,7 +55,9 @@ ActiveRecord::Schema.define(version: 20180706102358) do
     t.string   "provider"
     t.string   "uid"
     t.string   "playername"
+    t.integer  "pieces_id"
     t.index ["email"], name: "index_players_on_email", unique: true, using: :btree
+    t.index ["pieces_id"], name: "index_players_on_pieces_id", using: :btree
     t.index ["playername"], name: "index_players_on_playername", using: :btree
     t.index ["reset_password_token"], name: "index_players_on_reset_password_token", unique: true, using: :btree
   end

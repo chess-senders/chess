@@ -5,6 +5,10 @@ class Player < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: %i[facebook google_oauth2]
 
+  def games
+    Game.where(white_player_id: self).or(Game.where(black_player_id: self))
+  end
+
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |player|
       player.email = auth.info.email
@@ -14,4 +18,5 @@ class Player < ApplicationRecord
   end
 
   has_many :games
+  has_many :pieces
 end

@@ -1,0 +1,36 @@
+<h1><%= @game.name %> pieces controller</h1>
+
+<h4><%= @game.state %></h4>
+
+<table class='chessboard'>
+	<% @chess_board.each_with_index do |row, y| %>
+		<tr>
+			<% row.each_with_index do |piece, x| %>
+				<td  data-row=<%= y %> data-column=<%= x %> >
+          <% if !piece.nil? %>
+            <%= link_to "#{ piece.color } #{ piece.type }", '#',
+              class: "piece #{'active' if piece == @piece}",
+              data: {
+                row: y,
+                column: x,
+                url: piece_path(piece)
+              }
+            %>
+          <% end %>
+        </td>
+			<% end %>
+		</tr>
+	<% end %>
+</table>
+
+<script type="text/javascript">
+  $(()=>{
+    $('td').click((e)=>{
+      $.ajax({
+        type: 'PUT',
+        url: $('.active').data('url'),
+        data: { row: $(e.target).data('row'), column: $(e.target).data('column') }
+      });
+    });
+  });
+</script>

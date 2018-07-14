@@ -1,3 +1,7 @@
 <h1><%= @player.playername %></h1>
-
-<%= button_to 'create game', new_game_path, method: :get %>
+<h2>My Games</h2>
+<ul>
+  <% @player.games.each do |game| %>
+    <li><%= link_to game.name, game_path(game) %></li>
+  <% end %>
+</ul>
