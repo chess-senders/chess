@@ -5,7 +5,8 @@ $blackbg: #eac59a;
 $whitebg: #ffffff;
 
 .chessboard {
-  margin: auto;
+  margin: 0 auto 3rem auto;
+  cursor: pointer;
 }
 
 table {
@@ -17,6 +18,10 @@ table {
 td {
   width: 100px; height: 100px;
   text-align: center;
+}
+
+td .active {
+  border: 5px solid green;
 }
 
 tr:nth-child(odd) td:nth-child(even),

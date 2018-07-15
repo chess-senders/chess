@@ -1,11 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe Bishop, type: :model do
-  player = FactoryBot.create(:player, playername: 'Wayne')
-  game = FactoryBot.create(:game, white_player: player)
-  bishop = FactoryBot.create(:bishop, game: game, player_color: 1)
-
   describe 'a player wants to move his bishop' do
+    player = FactoryBot.create(:player, playername: 'Wayne')
+    game = FactoryBot.create(:game, white_player: player)
+    bishop = FactoryBot.create(:bishop, game: game, player: player)
+
     it 'does not allow the bishop to move in only 1 direction' do
       # move column only
       bishop.move(1, 5)

@@ -1,8 +1,13 @@
 class Piece < ApplicationRecord
   belongs_to :game
+  belongs_to :player
 
   def move(new_row, new_col)
     Pieces::MoveTo.call(self, row: new_row, column: new_col) if valid_move?(new_row, new_col)
+  end
+
+  def color
+    Pieces::Color.call(self)
   end
 
   protected

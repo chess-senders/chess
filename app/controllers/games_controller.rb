@@ -21,33 +21,22 @@ class GamesController < ApplicationController
   end
 
   def show
-    current_game
-    @grid = multidimensional_grid(current_game.pieces)
+    @game = current_game
+    @chess_board = Games::RenderChessboard.call(@game.pieces)
   end
 
   def update
     @game = Game.find(params[:id])
     if @game.valid? && current_player != @game.white_player
       @game.update(black_player: current_player, state: 1)
+      @game.add_pieces_to_board
+      redirect_to game_path(@game)
     else
       render :new, status: :unprocessable_entity
     end
   end
 
   private
-
-  def multidimensional_grid(pieces)
-    grid = []
-    (1..8).each do |row|
-      grid_row = []
-      (1..8).each do |col|
-        space = pieces.select { |piece| piece.row == row && piece.column == col }
-        grid_row << space.first
-      end
-      grid << grid_row
-    end
-    grid
-  end
 
   def current_game
     @current_game ||= Game.find(params[:id])

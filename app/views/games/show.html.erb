@@ -1,18 +1,19 @@
-<h1><%= current_game.name %></h1>
-<br/>
+<h1><%= @game.white_player.playername %> - <%= @game.name %></h1>
+
+<h4><%= @game.state %></h4>
+
 <table class='chessboard'>
-	<% @grid.each_with_index do |row, y| %>
-		<tr id='row <%= y + 1 %>'>
+	<% @chess_board.each_with_index do |row, y| %>
+		<tr>
 			<% row.each_with_index do |piece, x| %>
-				<td id='column <%= x + 1 %>'>
+				<td>
           <% if !piece.nil? %>
-            <% if piece.player_color == current_game.white_player_id %>
-              White
-            <% elsif piece.player_color == current_game.black_player_id %>
-              Black
-            <% end %>
-            <%= piece.type %>
-          <% end %>    
+						<%= link_to_if Pieces::Disabled.call(piece),
+							"#{ piece.color } #{ piece.type }",
+							piece_path(piece),
+							class: "piece"
+						%>
+					<% end %>
         </td>
 			<% end %>
 		</tr>
