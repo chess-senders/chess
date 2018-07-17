@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180713021002) do
+ActiveRecord::Schema.define(version: 20180716121653) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 20180713021002) do
   end
 
   create_table "pieces", force: :cascade do |t|
-    t.boolean  "captured"
+    t.boolean  "captured",   default: false
     t.integer  "row"
     t.integer  "column"
     t.integer  "game_id"
@@ -53,9 +53,9 @@ ActiveRecord::Schema.define(version: 20180713021002) do
     t.inet     "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
-    t.string   "playername"
     t.string   "provider"
     t.string   "uid"
+    t.string   "playername"
     t.integer  "pieces_id"
     t.index ["email"], name: "index_players_on_email", unique: true, using: :btree
     t.index ["pieces_id"], name: "index_players_on_pieces_id", using: :btree
