@@ -1,7 +1,4 @@
 class King < Piece
-<<<<<<< HEAD
-  def valid_move?(new_square)
-=======
   before_save :default_pic
 
 
@@ -11,7 +8,6 @@ class King < Piece
   end
 
   def valid_move?(new_row, new_col)
->>>>>>> move_to
     super &&
       valid_movement?(1, -1, new_square[:row] - row) &&
       valid_movement?(1, -1, new_square[:column] - column)
