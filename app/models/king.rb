@@ -3,8 +3,8 @@ class King < Piece
 
 
   def default_pic
-    self.picture = "whiteking.png" if self.row == 0
-    self.picture = "blackking.png" if self.row == 7
+    self.picture = "whiteking.png" if color == 'White'
+    self.picture = "blackking.png" if color == 'Black'
   end
 
   def valid_move?(new_row, new_col)
