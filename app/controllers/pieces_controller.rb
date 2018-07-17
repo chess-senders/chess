@@ -1,11 +1,7 @@
 class PiecesController < ApplicationController
-  def show
-    @piece = current_piece
-    @game = @piece.game
-    @chess_board = Games::RenderChessboard.call(@game.pieces)
-  end
 
   def update
+    puts 'Pieces Controller shaka melaka!'
     @piece = current_piece
     @game = @piece.game
     # if current_player != @piece.player
