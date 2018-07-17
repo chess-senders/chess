@@ -12,6 +12,12 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui
+//= require jquery-ui/core
+//= require jquery-ui/widget
+//= require jquery-ui/position
+//= require jquery-ui/widgets/draggable
+//= require jquery-ui/widgets/droppable
 //= require popper
 //= require bootstrap
 //= require turbolinks
