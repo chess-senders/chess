@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Pawn, type: :model do
@@ -151,7 +152,6 @@ RSpec.describe Pawn, type: :model do
             black_player: b_player
           )
           pawn = FactoryBot.create(:pawn, game: game, player: b_player)
-
 
           pawn.move(6, 1)
           pawn.move(4, 1)
