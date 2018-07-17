@@ -6,15 +6,25 @@
 	<% @chess_board.each_with_index do |row, y| %>
 		<tr>
 			<% row.each_with_index do |piece, x| %>
-				<td>
+				<td  data-row=<%= y %> data-column=<%= x %> >
           <% if !piece.nil? %>
-						<%= link_to_if Pieces::Disabled.call(piece),
-							image_tag(piece.picture),
-							piece_path(piece),
-							class: "piece"%>
-						<% end %>
+						<%= image_tag piece.picture,
+						class: "piece #{ 'piece_enabled' if Pieces::Disabled.call(piece) }"
+						%>
 					<% end %>
-          <% end %>
         </td>
+			<% end %>
 		</tr>
+	<% end %>
 </table>
+
+<script type="text/javascript">
+	$(()=>{
+		$('.piece_enabled').click((e)=>{
+			$.ajax({
+        type: 'GET',
+        url: $('.active').data('url')
+      });
+		});
+	});
+</script>
