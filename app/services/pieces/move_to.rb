@@ -1,6 +1,7 @@
 module Pieces
   class MoveTo < ApplicationService
     def initialize(piece, new_square)
+      binding.pry
       @piece = piece
       @game = piece.game
       @current_column = piece.column

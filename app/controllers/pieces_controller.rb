@@ -12,12 +12,8 @@ class PiecesController < ApplicationController
     # if current_player != @piece.player
     #   return redirect_to game_path(@game)
     # end
-    if @piece.move_to!(new_square_params)
-      update_state(@game)
-      redirect_to game_path(@game)
-    else
-      redirect_to game_path(@game)
-    end
+    update_state(@game) if @piece.move_to!(new_square_params)
+    redirect_to game_path(@game)
   end
 
   private
