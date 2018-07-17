@@ -1,10 +1,11 @@
 module Pieces
   class MoveTo < ApplicationService
     def initialize(piece, new_square)
+      binding.pry
       @piece = piece
       @game = piece.game
-      @current_column = piece[:column]
-      @current_row = piece[:row]
+      @current_column = piece.column
+      @current_row = piece.row
       @new_column = new_square[:column]
       @new_row = new_square[:row]
     end

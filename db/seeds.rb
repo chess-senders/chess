@@ -10,7 +10,7 @@ player_black = Player.create!(
 )
 
 def create_games(player)
-  5.times do |n|
+  10.times do |n|
     game = Game.create!(name: "Game #{n}", white_player: player)
     game.add_pieces_to_board
   end

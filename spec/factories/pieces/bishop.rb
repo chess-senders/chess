@@ -5,6 +5,6 @@ FactoryBot.define do
     row 1
     column 7
     type 'Bishop'
-    game_id { FactoryBot.build(:game).id }
+    game_id { FactoryBot.build(:game) }
   end
 end

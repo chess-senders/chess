@@ -2,7 +2,8 @@ class PiecesController < ApplicationController
   def show
     @piece = current_piece
     @game = @piece.game
-    @chess_board = Games::RenderChessboard.call(@game.pieces)
+    @pieces = @game.pieces.where(captured: false)
+    @chess_board = Games::RenderChessboard.call(@pieces)
   end
 
   def update
@@ -11,20 +12,15 @@ class PiecesController < ApplicationController
     # if current_player != @piece.player
     #   return redirect_to game_path(@game)
     # end
-    update_state(@game)
-    @piece.update_attributes(update_piece_params)
-    if @piece.valid?
-      @game.update(state: 2) if @game.state == 1
-      redirect_to game_path(@game)
-    else
-      return render_status(:unprocessable_entity)
-    end
+    update_state(@game) if @piece.move_to!(new_square_params)
+    redirect_to game_path(@game)
   end
 
   private
 
-  def update_piece_params
-    params.permit(:row, :column, :id)
+  def new_square_params
+    @params = params.permit(:row, :column, :id)
+    @params.each { |k, v| @params[k] = v.to_i }
   end
 
   def current_piece

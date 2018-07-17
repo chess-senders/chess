@@ -22,7 +22,8 @@ class GamesController < ApplicationController
 
   def show
     @game = current_game
-    @chess_board = Games::RenderChessboard.call(@game.pieces)
+    @pieces = @game.pieces.where(captured: false)
+    @chess_board = Games::RenderChessboard.call(@pieces)
   end
 
   def update
