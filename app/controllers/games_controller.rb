@@ -39,6 +39,19 @@ class GamesController < ApplicationController
 
   private
 
+  def multidimensional_grid(pieces)
+    grid = []
+    (0..7).each do |row|
+      grid_row = []
+      (0..7).each do |col|
+        space = pieces.select { |piece| piece.row == row && piece.column == col }
+        grid_row << space.first
+      end
+      grid << grid_row
+    end
+    grid
+  end
+
   def current_game
     @current_game ||= Game.find(params[:id])
   end
