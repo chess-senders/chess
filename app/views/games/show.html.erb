@@ -9,13 +9,12 @@
 				<td>
           <% if !piece.nil? %>
 						<%= link_to_if Pieces::Disabled.call(piece),
-							"#{ piece.color } #{ piece.type }",
+							image_tag(piece.picture),
 							piece_path(piece),
-							class: "piece"
-						%>
+							class: "piece"%>
+						<% end %>
 					<% end %>
+          <% end %>
         </td>
-			<% end %>
 		</tr>
-	<% end %>
 </table>
