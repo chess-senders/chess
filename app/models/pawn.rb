@@ -20,11 +20,8 @@ class Pawn < Piece
   private
 
   def valid_forward_move?
-    if moved
-      valid_movement?(1, 1, rows_moved)
-    else
-      valid_movement?(2, 1, rows_moved)
-    end
+    max_rows_allowed = moved? ? 1 : 2
+    valid_movement?(max_rows_allowed, 1, rows_moved)
   end
 
   def capturing_piece?
@@ -53,6 +50,6 @@ class Pawn < Piece
   end
 
   def white_player?
-    game.white_player_id == player_color
+    game.white_player_id == player.id
   end
 end
