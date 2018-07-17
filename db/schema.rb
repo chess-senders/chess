@@ -30,12 +30,12 @@ ActiveRecord::Schema.define(version: 20180713021002) do
     t.integer  "row"
     t.integer  "column"
     t.integer  "game_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.string   "type"
     t.string   "picture"
     t.integer  "player_id"
-    t.boolean  "moved",        default: false
+    t.boolean  "moved",      default: false
     t.index ["game_id"], name: "index_pieces_on_game_id", using: :btree
     t.index ["player_id"], name: "index_pieces_on_player_id", using: :btree
   end
@@ -53,9 +53,9 @@ ActiveRecord::Schema.define(version: 20180713021002) do
     t.inet     "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.string   "playername"
     t.string   "provider"
     t.string   "uid"
-    t.string   "playername"
     t.integer  "pieces_id"
     t.index ["email"], name: "index_players_on_email", unique: true, using: :btree
     t.index ["pieces_id"], name: "index_players_on_pieces_id", using: :btree

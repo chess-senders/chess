@@ -10,7 +10,7 @@ RSpec.describe Pawn, type: :model do
         pawn = FactoryBot.create(
           :pawn,
           game: game,
-          player_color: w_player.id,
+          player: w_player,
           row: 1
         )
 
@@ -30,7 +30,7 @@ RSpec.describe Pawn, type: :model do
         pawn = FactoryBot.create(
           :pawn,
           game: game,
-          player_color: b_player.id,
+          player: b_player,
           row: 6
         )
 
@@ -51,7 +51,7 @@ RSpec.describe Pawn, type: :model do
         pawn_to_move = FactoryBot.create(
           :pawn,
           game: game,
-          player_color: b_player.id
+          player: b_player
         )
 
         FactoryBot.create(
@@ -59,7 +59,7 @@ RSpec.describe Pawn, type: :model do
           game: game,
           row: 6,
           column: 2,
-          player_color: w_player.id
+          player: w_player
         )
 
         pawn_to_move.move(6, 2)
@@ -70,8 +70,13 @@ RSpec.describe Pawn, type: :model do
       context 'as the first move' do
         it 'by moving 2 rows' do
           w_player = FactoryBot.create(:player, playername: 'Wayne')
-          game = FactoryBot.create(:game, white_player: w_player)
-          pawn = FactoryBot.create(:pawn, game: game)
+          b_player = FactoryBot.create(:player, playername: 'John')
+          game = FactoryBot.create(
+            :game,
+            white_player: w_player,
+            black_player: b_player
+          )
+          pawn = FactoryBot.create(:pawn, game: game, player: b_player)
 
           pawn.move(5, 1)
           expect(pawn.row).to eq(5)
@@ -92,7 +97,7 @@ RSpec.describe Pawn, type: :model do
         pawn = FactoryBot.create(
           :pawn,
           game: game,
-          player_color: b_player.id,
+          player: b_player,
           row: 6
         )
 
@@ -104,7 +109,7 @@ RSpec.describe Pawn, type: :model do
       it 'by moving sideways' do
         w_player = FactoryBot.create(:player, playername: 'Wayne')
         game = FactoryBot.create(:game, white_player: w_player)
-        pawn = FactoryBot.create(:pawn, game: game)
+        pawn = FactoryBot.create(:pawn, game: game, player: w_player)
 
         pawn.move(7, 2)
         expect(pawn.row).to eq(7)
@@ -122,13 +127,13 @@ RSpec.describe Pawn, type: :model do
         pawn_to_move = FactoryBot.create(
           :pawn,
           game: game,
-          player_color: b_player.id
+          player: b_player
         )
         FactoryBot.create(
           :pawn,
           game: game,
           row: 6,
-          player_color: w_player.id
+          player: w_player
         )
 
         pawn_to_move.move(6, 1)
@@ -139,8 +144,14 @@ RSpec.describe Pawn, type: :model do
       context 'after the first move' do
         it 'by moving 2 rows' do
           w_player = FactoryBot.create(:player, playername: 'Wayne')
-          game = FactoryBot.create(:game, white_player: w_player)
-          pawn = FactoryBot.create(:pawn, game: game)
+          b_player = FactoryBot.create(:player, playername: 'John')
+          game = FactoryBot.create(
+            :game,
+            white_player: w_player,
+            black_player: b_player
+          )
+          pawn = FactoryBot.create(:pawn, game: game, player: b_player)
+
 
           pawn.move(6, 1)
           pawn.move(4, 1)
