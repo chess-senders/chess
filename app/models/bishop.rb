@@ -3,8 +3,8 @@ class Bishop < Piece
 
 
   def default_pic
-    self.picture = "whitebishop.png" if self.row == 0
-    self.picture = "blackbishop.png" if self.row == 7
+    self.picture = "whitebishop.png" if color == 'White'
+    self.picture = "blackbishop.png" if color == 'Black'
   end
 
   def valid_move?(new_row, new_col)
