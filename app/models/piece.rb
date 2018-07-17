@@ -13,7 +13,8 @@ class Piece < ApplicationRecord
   protected
 
   def valid_move?(new_square)
-    in_bounds?(new_square[:row], new_square[:column])
+    in_bounds?(new_square[:row], new_square[:column]) &&
+    !Pieces::Obstruction.call(self, new_square)
   end
 
   def in_bounds?(new_row, new_col)
