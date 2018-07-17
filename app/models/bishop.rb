@@ -3,12 +3,12 @@ class Bishop < Piece
 
 
   def default_pic
-    self.picture = "whitebishop.png" if self.row == 0
-    self.picture = "blackbishop.png" if self.row == 7
+    self.picture = "whitebishop.png" if color == 'White'
+    self.picture = "blackbishop.png" if color == 'Black'
   end
 
-  def valid_move?(new_row, new_col)
-    return false unless (new_row - row).abs == (new_col - column).abs
+  def valid_move?(new_square)
+    return false unless (new_square[:row] - row).abs == (new_square[:column] - column).abs
     super &&
       valid_movement?(7, -7, new_square[:row] - row) &&
       valid_movement?(7, -7, new_square[:column] - column)

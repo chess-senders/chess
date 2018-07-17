@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 20180716121653) do
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
     t.string   "type"
+    t.string   "picture"
     t.integer  "player_id"
     t.index ["game_id"], name: "index_pieces_on_game_id", using: :btree
     t.index ["player_id"], name: "index_pieces_on_player_id", using: :btree

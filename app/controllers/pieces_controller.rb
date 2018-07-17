@@ -1,11 +1,4 @@
 class PiecesController < ApplicationController
-  def show
-    @piece = current_piece
-    @game = @piece.game
-    @pieces = @game.pieces.where(captured: false)
-    @chess_board = Games::RenderChessboard.call(@pieces)
-  end
-
   def update
     @piece = current_piece
     @game = @piece.game
