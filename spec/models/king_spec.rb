@@ -80,4 +80,53 @@ RSpec.describe King, type: :model do
       expect(king.column).to eq(2)
     end
   end
+
+  describe 'tries to make special move' do
+    white_player = FactoryBot.create(:player, playername: 'Wayne')
+    black_player = FactoryBot.create(:player, playername: 'Ricky')
+    game = FactoryBot.create(:game, white_player: white_player, black_player: black_player)
+
+    it 'castles kingside' do
+      king = FactoryBot.create(:king, game: game, player: player, row: 0, column: 4)
+      rook = FactoryBot.create(:rook, game: game, player: player, row: 0, column: 7)
+      king.castle!('kingside')
+      expect(king.row).to eq(0)
+      expect(king.column).to eq(6)
+      expect(rook.row).to eq(0)
+      expect(rook.column).to eq(5)
+    end
+
+    it 'castles queenside' do
+      king = FactoryBot.create(:king, game: game, player: player, row: 0, column: 4)
+      rook = FactoryBot.create(:rook, game: game, player: player, row: 0, column: 0)
+      king.castle!('queenside')
+      expect(king.row).to eq(0)
+      expect(king.column).to eq(1)
+      expect(rook.row).to eq(0)
+      expect(rook.column).to eq(2)
+    end
+
+    it 'will not castle if king has already been moved' do
+      king = FactoryBot.create(:king, game: game, player: player, row: 0, column: 4)
+      rook = FactoryBot.create(:rook, game: game, player: player, row: 0, column: 7)
+      king.move_to!({ row: 0, column: 2 })
+      king.castle!('kingside')
+      expect(king.row).to eq(0)
+      expect(king.column).to eq(4)
+      expect(rook.row).to eq(0)
+      expect(rook.column).to eq(7)
+    end
+
+    it 'will not castle if rook has already been moved' do
+      king = FactoryBot.create(:king, game: game, player: player, row: 0, column: 4)
+      rook = FactoryBot.create(:rook, game: game, player: player, row: 0, column: 0)
+      rook.move_to!({ row: 0, column: 2 })
+      king.castle!('queenside')
+      expect(king.row).to eq(0)
+      expect(king.column).to eq(4)
+      expect(rook.row).to eq(0)
+      expect(rook.column).to eq(0)
+    end
+  end
+
 end

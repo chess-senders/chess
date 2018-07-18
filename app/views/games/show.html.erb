@@ -2,6 +2,10 @@
 
 <h4><%= @game.state %></h4>
 
+<h3>Speical Moves</h3>
+<%= button_to 'Castle Queenside', '#', class: 'castle' %>
+<%= button_to 'Castle Kingside', '#', class: 'castle' %>
+
 <table class='chessboard'>
 	<% @chess_board.each_with_index do |row, y| %>
 		<tr>
@@ -26,6 +30,15 @@
 
 <script type="text/javascript">
 	$(()=>{
+
+		$('.castle').click((e)=>{
+			$.ajax({
+				type: 'PUT',
+				url: url,
+				data: { row: $(e.target).data('row'), column: $(e.target).data('column') }
+			});
+		})
+
 		let droppable = (url) => {
 			$( ".droppable" ).droppable({
 				drop: (e)=>{
