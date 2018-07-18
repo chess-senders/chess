@@ -12,4 +12,8 @@ class King < Piece
       valid_movement?(1, -1, new_square[:row] - row) &&
       valid_movement?(1, -1, new_square[:column] - column)
   end
+
+  def castle!(direction)
+    Pieces::King::Castle.call(self, direction) if !moved
+  end
 end
