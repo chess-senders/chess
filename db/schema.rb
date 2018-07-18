@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 20180716121653) do
     t.string   "type"
     t.string   "picture"
     t.integer  "player_id"
+    t.boolean  "moved",      default: false
     t.index ["game_id"], name: "index_pieces_on_game_id", using: :btree
     t.index ["player_id"], name: "index_pieces_on_player_id", using: :btree
   end

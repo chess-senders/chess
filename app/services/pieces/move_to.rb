@@ -13,10 +13,10 @@ module Pieces
       if game.square_occupied?(new_column, new_row)
         new_piece = game.get_piece(new_column, new_row)
         return false if new_piece.player_id == piece.player_id
-        piece.update_attributes(column: new_column, row: new_row)
+        piece.update_attributes(column: new_column, row: new_row, moved: true)
         new_piece.update_attributes(row: nil, column: nil, captured: true)
       else
-        piece.update_attributes(column: new_column, row: new_row)
+        piece.update_attributes(column: new_column, row: new_row, moved: true)
       end
       true
     end
