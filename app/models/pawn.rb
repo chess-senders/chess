@@ -3,15 +3,14 @@
 class Pawn < Piece
   before_save :default_pic
 
-
   def default_pic
     self.picture = "whitepawn.png" if color == 'White'
     self.picture = "blackpawn.png" if color == 'Black'
   end
 
-  def valid_move?(new_row, new_col)
-    @new_row = new_row
-    @new_col = new_col
+  def valid_move?(new_square)
+    @new_row = new_square[:row]
+    @new_col = new_square[:column]
 
     super &&
       (moving_forward? || capturing_piece?) && valid_forward_move?

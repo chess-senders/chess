@@ -3,8 +3,8 @@ module Pieces
     def initialize(piece, new_square)
       @piece = piece
       @game = piece.game
-      @current_column = piece[:column]
-      @current_row = piece[:row]
+      @current_column = piece.column
+      @current_row = piece.row
       @new_column = new_square[:column]
       @new_row = new_square[:row]
     end
@@ -14,7 +14,7 @@ module Pieces
         new_piece = game.get_piece(new_column, new_row)
         return false if new_piece.player_id == piece.player_id
         piece.update_attributes(column: new_column, row: new_row, moved: true)
-        new_piece.update_attributes(captured: true)
+        new_piece.update_attributes(row: nil, column: nil, captured: true)
       else
         piece.update_attributes(column: new_column, row: new_row, moved: true)
       end

@@ -6,10 +6,10 @@ class Rook < Piece
     self.picture = "blackrook.png" if color == 'Black'
   end
 
-  def valid_move?(new_row, new_col)
+  def valid_move?(new_square)
+    return false unless new_square[:row] == row || new_square[:column] == column
     super &&
-      valid_movement?(7, -7, new_row - row) &&
-      valid_movement?(7, -7, new_col - column)
-    return true if new_row == row || new_col == column
+      valid_movement?(7, -7, new_square[:row] - row) &&
+      valid_movement?(7, -7, new_square[:column] - column)
   end
 end
