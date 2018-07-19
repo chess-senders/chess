@@ -82,7 +82,6 @@ RSpec.describe King, type: :model do
   end
 
   describe 'tries to make special move' do
-
     it 'castles with kingside rook' do
       white_player = FactoryBot.create(:player, playername: 'Wayne')
       black_player = FactoryBot.create(:player, playername: 'Ricky')
