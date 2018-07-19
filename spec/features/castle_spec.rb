@@ -15,6 +15,7 @@ describe 'castle the king' do
     game.update_attributes(state: 1)
     visit game_path(game)
     click_button('Castle Queenside')
+    visit game_path(game)
     expect(king.column).to eq(1)
     expect(rook.column).to eq(2)
   end

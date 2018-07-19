@@ -3,8 +3,8 @@
 <h4><%= @game.state %></h4>
 
 <h3>Speical Moves</h3>
-<%= button_to 'Castle Queenside', '#', class: 'castle' %>
-<%= button_to 'Castle Kingside', '#', class: 'castle' %>
+<button type="button" name="queenside" class='castle'>Castle Queenside</button>
+<button type="button" name="kingside" class='castle'>Castle Kingside</button>
 
 <table class='chessboard'>
 	<% @chess_board.each_with_index do |row, y| %>

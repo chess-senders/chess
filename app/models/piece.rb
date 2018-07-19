@@ -25,7 +25,3 @@ class Piece < ApplicationRecord
     (new_pos <= max) && (new_pos >= min)
   end
 end
-#
-# valid_movement?(8, 1, new_square[:row]) && valid_movement?(8, 1, new_square[:column])
-#
-# in_bounds?(new_square[:row], new_square[:column])
