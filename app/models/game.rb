@@ -14,16 +14,12 @@ class Game < ApplicationRecord
     'White Won'
   ]
 
-  def get_piece(column, row)
-    pieces.where(column: column, row: row).first
+  def get_piece(square)
+    pieces.where(column: square[:column], row: square[:row]).first
   end
 
-  def get_rook
-    pieces.where('column < ?', 4)
-  end
-
-  def square_occupied?(column, row)
-    pieces.where(column: column, row: row).any?
+  def square_occupied?(square)
+    pieces.where(column: square[:column], row: square[:row]).any?
   end
 
   def add_pieces_to_board
@@ -34,7 +30,7 @@ class Game < ApplicationRecord
     king = pieces.where(player: player, type: 'King').first
     opponent_pieces = pieces.where.not(player: player)
     opponent_pieces.each do |piece|
-      return true if piece.valid_move?(king.row, king.column)
+      return true if piece.valid_move?(row: king.row, column: king.column)
     end
     false
   end
