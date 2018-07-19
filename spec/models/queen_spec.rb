@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Queen, type: :model do
@@ -14,7 +16,7 @@ RSpec.describe Queen, type: :model do
         queen = FactoryBot.create(
           :queen,
           game: game,
-          player: b_player,
+          player: b_player
         )
 
         queen.move_to!(row: 3, column: 4)
@@ -33,14 +35,13 @@ RSpec.describe Queen, type: :model do
         queen = FactoryBot.create(
           :queen,
           game: game,
-          player: b_player,
+          player: b_player
         )
 
         queen.move_to!(row: 0, column: 7)
         expect(queen.row).to eq(0)
         expect(queen.column).to eq(7)
       end
-
 
       it 'multiple squares diagonally' do
         w_player = FactoryBot.create(:player, playername: 'Wayne')
@@ -53,7 +54,7 @@ RSpec.describe Queen, type: :model do
         queen = FactoryBot.create(
           :queen,
           game: game,
-          player: b_player,
+          player: b_player
         )
 
         queen.move_to!(row: 3, column: 7)
@@ -74,7 +75,7 @@ RSpec.describe Queen, type: :model do
         queen = FactoryBot.create(
           :queen,
           game: game,
-          player: b_player,
+          player: b_player
         )
 
         queen.move_to!(row: 1, column: 6)

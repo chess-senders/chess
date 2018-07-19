@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :queen do
-    captured false
     player nil
     row 0
     column 4
