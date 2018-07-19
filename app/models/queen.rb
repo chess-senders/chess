@@ -10,12 +10,16 @@ class Queen < Piece
     @new_row = new_square[:row]
     @new_col = new_square[:column]
     super &&
-      vertical?
+      vertical? || horizontal?
   end
 
   private
 
   def vertical?
     @new_col == column
+  end
+
+  def horizontal?
+    @new_row == row
   end
 end
