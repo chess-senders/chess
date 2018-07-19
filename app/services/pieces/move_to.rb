@@ -3,26 +3,16 @@ module Pieces
     def initialize(piece, new_square)
       @piece = piece
       @game = piece.game
-      @current_column = piece.column
-      @current_row = piece.row
-      @new_column = new_square[:column]
-      @new_row = new_square[:row]
+      @new_square = new_square
     end
 
     def call
-      if game.square_occupied?(new_column, new_row)
-        new_piece = game.get_piece(new_column, new_row)
-        return false if new_piece.player_id == piece.player_id
-        piece.update_attributes(column: new_column, row: new_row, moved: true)
-        new_piece.update_attributes(row: nil, column: nil, captured: true)
-      else
-        piece.update_attributes(column: new_column, row: new_row, moved: true)
-      end
-      true
+      return Pieces::Capture.call(piece, new_square) if game.square_occupied?(new_square)
+      piece.update_attributes(column: new_square[:column], row: new_square[:row], moved: true)
     end
 
     private
 
-    attr_accessor :game, :piece, :current_row, :current_column, :new_row, :new_column, :new_piece
+    attr_accessor :game, :piece, :new_square
   end
 end

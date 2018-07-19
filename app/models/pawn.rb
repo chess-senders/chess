@@ -4,11 +4,12 @@ class Pawn < Piece
   before_save :default_pic
 
   def default_pic
-    self.picture = "whitepawn.png" if color == 'White'
-    self.picture = "blackpawn.png" if color == 'Black'
+    self.picture = 'whitepawn.png' if color == 'White'
+    self.picture = 'blackpawn.png' if color == 'Black'
   end
 
   def valid_move?(new_square)
+    @new_square = new_square
     @new_row = new_square[:row]
     @new_col = new_square[:column]
 
@@ -32,7 +33,7 @@ class Pawn < Piece
   end
 
   def cols_moved
-    (@new_col - column).abs
+    (new_col - column).abs
   end
 
   def moving_forward?
@@ -40,15 +41,17 @@ class Pawn < Piece
   end
 
   def square_free?
-    !game.square_occupied?(@new_col, @new_row)
+    !game.square_occupied?(new_square)
   end
 
   def rows_moved
     # forward movement only
-    white_player? ? @new_row - row : row - @new_row
+    white_player? ? new_row - row : row - new_row
   end
 
   def white_player?
     game.white_player_id == player.id
   end
+
+  attr_accessor :new_square, :new_row, :new_col
 end

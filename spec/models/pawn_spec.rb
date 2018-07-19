@@ -15,7 +15,7 @@ RSpec.describe Pawn, type: :model do
           row: 1
         )
 
-        pawn.move_to!({ row: 2, column: 1 })
+        pawn.move_to!(row: 2, column: 1)
         expect(pawn.row).to eq(2)
         expect(pawn.column).to eq(1)
       end
@@ -35,7 +35,7 @@ RSpec.describe Pawn, type: :model do
           row: 6
         )
 
-        pawn.move_to!({ row: 5, column: 1 })
+        pawn.move_to!(row: 5, column: 1)
         expect(pawn.row).to eq(5)
         expect(pawn.column).to eq(1)
       end
@@ -63,7 +63,7 @@ RSpec.describe Pawn, type: :model do
           player: w_player
         )
 
-        pawn_to_move.move_to!({ row: 6, column: 2 })
+        pawn_to_move.move_to!(row: 6, column: 2)
         expect(pawn_to_move.row).to eq(6)
         expect(pawn_to_move.column).to eq(2)
       end
@@ -79,7 +79,7 @@ RSpec.describe Pawn, type: :model do
           )
           pawn = FactoryBot.create(:pawn, game: game, player: b_player)
 
-          pawn.move_to!({ row: 5, column: 1 })
+          pawn.move_to!(row: 5, column: 1)
           expect(pawn.row).to eq(5)
           expect(pawn.column).to eq(1)
         end
@@ -102,7 +102,7 @@ RSpec.describe Pawn, type: :model do
           row: 6
         )
 
-        pawn.move_to!({ row: 7, column: 1 })
+        pawn.move_to!(row: 7, column: 1)
         expect(pawn.row).to eq(6)
         expect(pawn.column).to eq(1)
       end
@@ -112,7 +112,7 @@ RSpec.describe Pawn, type: :model do
         game = FactoryBot.create(:game, white_player: w_player)
         pawn = FactoryBot.create(:pawn, game: game, player: w_player)
 
-        pawn.move_to!({ row: 7, column: 2 })
+        pawn.move_to!(row: 7, column: 2)
         expect(pawn.row).to eq(7)
         expect(pawn.column).to eq(1)
       end
@@ -137,7 +137,7 @@ RSpec.describe Pawn, type: :model do
           player: w_player
         )
 
-        pawn_to_move.move_to!({ row: 6, column: 1 })
+        pawn_to_move.move_to!(row: 6, column: 1)
         expect(pawn_to_move.row).to eq(7)
         expect(pawn_to_move.column).to eq(1)
       end
@@ -153,8 +153,8 @@ RSpec.describe Pawn, type: :model do
           )
           pawn = FactoryBot.create(:pawn, game: game, player: b_player)
 
-          pawn.move_to!({ row: 6, column: 1 })
-          pawn.move_to!({ row: 4, column: 1 })
+          pawn.move_to!(row: 6, column: 1)
+          pawn.move_to!(row: 4, column: 1)
           expect(pawn.row).to eq(6)
           expect(pawn.column).to eq(1)
         end
