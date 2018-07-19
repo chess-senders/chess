@@ -14,12 +14,12 @@ class Game < ApplicationRecord
     'White Won'
   ]
 
-  def get_piece(column, row)
-    pieces.where(column: column, row: row).first
+  def get_piece(square)
+    pieces.where(column: square[:column], row: square[:row]).first
   end
 
-  def square_occupied?(column, row)
-    pieces.where(column: column, row: row).any?
+  def square_occupied?(square)
+    pieces.where(column: square[:column], row: square[:row]).any?
   end
 
   def add_pieces_to_board
