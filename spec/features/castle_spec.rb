@@ -9,15 +9,14 @@ describe 'castle the king' do
     game = FactoryBot.create(:game, white_player: white_player, black_player: black_player, name: 'game1')
     rook = FactoryBot.create(:piece, game: game, player: white_player, type: 'Rook', row: 0, column: 0)
     king = FactoryBot.create(:piece, game: game, player: white_player, type: 'King', row: 0, column: 4)
-    sign_in(white_player)
     sign_in(black_player)
+    sign_in(white_player)
 
-    game.update_attributes(state: 1)
     visit game_path(game)
     click_button('Castle Queenside')
     visit game_path(game)
-    expect(king.column).to eq(1)
-    expect(rook.column).to eq(2)
+    expect(page).to have_content("Black's Turn")
+
   end
 
   #

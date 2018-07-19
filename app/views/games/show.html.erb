@@ -3,8 +3,20 @@
 <h4><%= @game.state %></h4>
 
 <h3>Speical Moves</h3>
-<button type="button" name="queenside" class='castle'>Castle Queenside</button>
-<button type="button" name="kingside" class='castle'>Castle Kingside</button>
+<%= button_tag "Castle Queenside",
+	class: 'castle',
+	data: {
+		url: game_castle_path(@game),
+		direction: 'queenside'
+	}
+%>
+<%= button_tag "Castle Kingside",
+	class: 'castle',
+	data: {
+		url: game_castle_path(@game),
+		direction: 'kingside'
+	}
+%>
 
 <table class='chessboard'>
 	<% @chess_board.each_with_index do |row, y| %>
@@ -34,8 +46,8 @@
 		$('.castle').click((e)=>{
 			$.ajax({
 				type: 'PUT',
-				url: url,
-				data: { row: $(e.target).data('row'), column: $(e.target).data('column') }
+				url: $(e.target).data('url'),
+				data: { direction: $(e.target).data('direction') }
 			});
 		})
 
