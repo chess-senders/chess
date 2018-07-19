@@ -12,9 +12,12 @@ class Knight < Piece
     @new_row = new_square[:row]
     @new_col = new_square[:column]
 
-    return false unless (row_diff == 2 && col_diff == 1)
+    super &&
+      vertical_movement?
+  end
 
-    super
+  def vertical_movement?
+    valid_movement?(2, 2, row_diff) && valid_movement?(1, 1, col_diff)
   end
 
   def row_diff
