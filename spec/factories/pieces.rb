@@ -5,6 +5,7 @@ FactoryBot.define do
     row 1
     column 1
     type 'Pawn'
+    picture 'not_real'
     game_id { FactoryBot.build(:game).id }
   end
 end

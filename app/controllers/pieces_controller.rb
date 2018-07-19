@@ -6,7 +6,7 @@ class PiecesController < ApplicationController
       # unless current_player == @piece.player
       #   return redirect_to game_path(@game)
       # end
-    update_state(@game) if @piece.move_to!(new_square_params)
+    Games::UpdateState.call(@game) if @piece.move_to!(new_square_params)
     redirect_to game_path(@game)
   end
 
@@ -21,8 +21,4 @@ class PiecesController < ApplicationController
     @piece || Piece.find(params[:id])
   end
 
-  def update_state(game)
-    return game.update(state: 2) if game.state == "White's Turn"
-    return game.update(state: 1) if game.state == "Black's Turn"
-  end
 end
