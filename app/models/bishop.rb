@@ -1,7 +1,6 @@
 class Bishop < Piece
   before_save :default_pic
 
-
   def default_pic
     self.picture = "whitebishop.png" if color == 'White'
     self.picture = "blackbishop.png" if color == 'Black'
