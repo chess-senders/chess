@@ -13,11 +13,15 @@ class Knight < Piece
     @new_col = new_square[:column]
 
     super &&
-      vertical_movement?
+      vertical_movement? || horizontal_movement?
   end
 
   def vertical_movement?
     valid_movement?(2, 2, row_diff) && valid_movement?(1, 1, col_diff)
+  end
+
+  def horizontal_movement?
+    valid_movement?(2, 2, col_diff) && valid_movement?(1, 1, row_diff)
   end
 
   def row_diff
