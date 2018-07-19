@@ -10,7 +10,7 @@ class Queen < Piece
     @new_row = new_square[:row]
     @new_col = new_square[:column]
     super &&
-      vertical? || horizontal?
+      vertical? || horizontal? || diagonal?
   end
 
   private
@@ -21,5 +21,9 @@ class Queen < Piece
 
   def horizontal?
     @new_row == row
+  end
+
+  def diagonal?
+    (@new_row - row).abs == (@new_col - column).abs
   end
 end

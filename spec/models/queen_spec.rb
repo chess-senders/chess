@@ -40,6 +40,26 @@ RSpec.describe Queen, type: :model do
         expect(queen.row).to eq(0)
         expect(queen.column).to eq(7)
       end
+
+
+      it 'multiple squares diagonally' do
+        w_player = FactoryBot.create(:player, playername: 'Wayne')
+        b_player = FactoryBot.create(:player, playername: 'John')
+        game = FactoryBot.create(
+          :game,
+          black_player: b_player,
+          white_player: w_player
+        )
+        queen = FactoryBot.create(
+          :queen,
+          game: game,
+          player: b_player,
+        )
+
+        queen.move_to!(row: 3, column: 7)
+        expect(queen.row).to eq(3)
+        expect(queen.column).to eq(7)
+      end
     end
 
     context 'in an invalid direction' do
