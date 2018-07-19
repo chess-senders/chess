@@ -14,6 +14,6 @@ class King < Piece
   end
 
   def castle!(direction)
-    Pieces::King::Castle.call(self, direction) if !moved
+    Pieces::King::Castle.call(self, direction)
   end
 end

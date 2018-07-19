@@ -18,6 +18,10 @@ class Game < ApplicationRecord
     pieces.where(column: column, row: row).first
   end
 
+  def get_rook
+    pieces.where('column < ?', 4)
+  end
+
   def square_occupied?(column, row)
     pieces.where(column: column, row: row).any?
   end

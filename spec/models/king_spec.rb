@@ -82,33 +82,54 @@ RSpec.describe King, type: :model do
   end
 
   describe 'tries to make special move' do
-    white_player = FactoryBot.create(:player, playername: 'Wayne')
-    black_player = FactoryBot.create(:player, playername: 'Ricky')
-    game = FactoryBot.create(:game, white_player: white_player, black_player: black_player)
 
-    it 'castles kingside' do
-      king = FactoryBot.create(:king, game: game, player: player, row: 0, column: 4)
-      rook = FactoryBot.create(:rook, game: game, player: player, row: 0, column: 7)
+    it 'castles with kingside rook' do
+      white_player = FactoryBot.create(:player, playername: 'Wayne')
+      black_player = FactoryBot.create(:player, playername: 'Ricky')
+      game = FactoryBot.create(:game, white_player: white_player, black_player: black_player)
+      king = FactoryBot.create(:king, game: game, player: white_player, row: 0, column: 4)
+      rook_kingside = FactoryBot.create(:rook, game: game, player: white_player, row: 0, column: 7)
+      rook_queenside = FactoryBot.create(:rook, game: game, player: white_player, row: 0, column: 0)
+
       king.castle!('kingside')
+      king.reload
+      rook_kingside.reload
+
       expect(king.row).to eq(0)
       expect(king.column).to eq(6)
-      expect(rook.row).to eq(0)
-      expect(rook.column).to eq(5)
+      expect(rook_kingside.row).to eq(0)
+      expect(rook_kingside.column).to eq(5)
+      expect(rook_queenside.row).to eq(0)
+      expect(rook_queenside.column).to eq(0)
     end
 
-    # it 'castles queenside' do
-    #   king = FactoryBot.create(:king, game: game, player: player, row: 0, column: 4)
-    #   rook = FactoryBot.create(:rook, game: game, player: player, row: 0, column: 0)
-    #   king.castle!('queenside')
-    #   expect(king.row).to eq(0)
-    #   expect(king.column).to eq(1)
-    #   expect(rook.row).to eq(0)
-    #   expect(rook.column).to eq(2)
-    # end
+    it 'castles queenside' do
+      white_player = FactoryBot.create(:player, playername: 'Wayne')
+      black_player = FactoryBot.create(:player, playername: 'Ricky')
+      game = FactoryBot.create(:game, white_player: white_player, black_player: black_player)
+      king = FactoryBot.create(:king, game: game, player: white_player, row: 0, column: 4)
+      rook_kingside = FactoryBot.create(:rook, game: game, player: white_player, row: 0, column: 7)
+      rook_queenside = FactoryBot.create(:rook, game: game, player: white_player, row: 0, column: 0)
+
+      king.castle!('queenside')
+      king.reload
+      rook_queenside.reload
+
+      expect(king.row).to eq(0)
+      expect(king.column).to eq(1)
+      expect(rook_queenside.row).to eq(0)
+      expect(rook_queenside.column).to eq(2)
+      expect(rook_kingside.row).to eq(0)
+      expect(rook_kingside.column).to eq(7)
+    end
 
     it 'will not castle if king has already been moved' do
-      king = FactoryBot.create(:king, game: game, player: player, row: 0, column: 4)
-      rook = FactoryBot.create(:rook, game: game, player: player, row: 0, column: 7)
+      white_player = FactoryBot.create(:player, playername: 'Wayne')
+      black_player = FactoryBot.create(:player, playername: 'Ricky')
+      game = FactoryBot.create(:game, white_player: white_player, black_player: black_player)
+      king = FactoryBot.create(:king, game: game, player: white_player, row: 0, column: 4)
+      rook = FactoryBot.create(:rook, game: game, player: white_player, row: 0, column: 7)
+
       king.move_to!({ row: 0, column: 3 })
       king.reload
       king.castle!('kingside')
@@ -119,8 +140,12 @@ RSpec.describe King, type: :model do
     end
 
     it 'will not castle if rook has already been moved' do
-      king = FactoryBot.create(:king, game: game, player: player, row: 0, column: 4)
-      rook = FactoryBot.create(:rook, game: game, player: player, row: 0, column: 0)
+      white_player = FactoryBot.create(:player, playername: 'Wayne')
+      black_player = FactoryBot.create(:player, playername: 'Ricky')
+      game = FactoryBot.create(:game, white_player: white_player, black_player: black_player)
+      king = FactoryBot.create(:king, game: game, player: white_player, row: 0, column: 4)
+      rook = FactoryBot.create(:rook, game: game, player: white_player, row: 0, column: 0)
+
       rook.move_to!({ row: 0, column: 3 })
       rook.reload
       king.castle!('queenside')
