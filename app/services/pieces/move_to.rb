@@ -7,12 +7,8 @@ module Pieces
     end
 
     def call
-      if game.square_occupied?(new_square)
-        return Pieces::Capture.call(piece, new_square)
-      else
-        piece.update_attributes(column: new_square[:column], row: new_square[:row], moved: true)
-      end
-      true
+      return Pieces::Capture.call(piece, new_square) if game.square_occupied?(new_square)
+      piece.update_attributes(column: new_square[:column], row: new_square[:row], moved: true)
     end
 
     private
