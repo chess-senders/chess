@@ -7,21 +7,21 @@ RSpec.describe Rook, type: :model do
 
   describe 'tries to move' do
     it 'will not move diagnol' do
-      rook.move_to!({ row: 5, column: 5 })
+      rook.move_to!(row: 5, column: 5)
       expect(rook.row).to eq(7)
       expect(rook.column).to eq(7)
     end
 
     it 'Moves to a new row' do
       rook = FactoryBot.create(:rook, game: game, player: player)
-      rook.move_to!({ row: 0, column: 7 })
+      rook.move_to!(row: 0, column: 7)
       expect(rook.row).to eq(0)
       expect(rook.column).to eq(7)
     end
 
     it 'Moves to a new column' do
       rook = FactoryBot.create(:rook, game: game, player: player)
-      rook.move_to!({ row: 7, column: 0 })
+      rook.move_to!(row: 7, column: 0)
       expect(rook.row).to eq(7)
       expect(rook.column).to eq(0)
     end

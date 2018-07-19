@@ -2,8 +2,8 @@ class Rook < Piece
   before_save :default_pic
 
   def default_pic
-    self.picture = "whiterook.png" if color == 'White'
-    self.picture = "blackrook.png" if color == 'Black'
+    self.picture = 'whiterook.png' if color == 'White'
+    self.picture = 'blackrook.png' if color == 'Black'
   end
 
   def valid_move?(new_square)
