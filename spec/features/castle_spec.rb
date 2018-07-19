@@ -14,9 +14,14 @@ describe 'castle the king' do
 
     visit game_path(game)
     click_button('Castle Queenside')
-    visit game_path(game)
-    expect(page).to have_content("Black's Turn")
+    king.reload
+    rook.reload
+    game.reload
 
+    visit game_path(game)
+    expect(king.column).to eq(1)
+    expect(rook.column).to eq(2)
+    expect(page).to have_content("Black's Turn")
   end
 
   #
