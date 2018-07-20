@@ -26,16 +26,16 @@ ActiveRecord::Schema.define(version: 20180719145136) do
   end
 
   create_table "pieces", force: :cascade do |t|
-    t.boolean  "captured",   default: false
+    t.boolean  "captured",   default: false, null: false
     t.integer  "row"
     t.integer  "column"
     t.integer  "game_id"
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
     t.string   "type"
-    t.string   "picture"
     t.integer  "player_id"
     t.integer  "moves",      default: 0
+    t.string   "picture"
     t.index ["game_id"], name: "index_pieces_on_game_id", using: :btree
     t.index ["player_id"], name: "index_pieces_on_player_id", using: :btree
   end
