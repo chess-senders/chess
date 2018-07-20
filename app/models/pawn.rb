@@ -14,10 +14,34 @@ class Pawn < Piece
     @new_col = new_square[:column]
 
     super &&
-      (moving_forward? || capturing_piece?) && valid_forward_move?
+      (moving_forward? || capturing_piece?) && valid_forward_move?   
+  end
+
+  def move_to!(new_square)
+    if valid_move?(new_square)
+      Pieces::MoveTo.call(self, new_square)
+    elsif valid_en_passant_move?(new_square)
+      Pieces::EnPassant.call(self, new_square)
+    end
+  end
+
+  def valid_en_passant_move?(new_square)
+    valid_forward_move? && moving_sideways? && double_moved_pawns?
   end
 
   private
+
+  def moved?
+    true if moves != 0
+  end
+
+  def double_moved_pawns?
+    if white_player?
+      game.pieces.where(type: 'Pawn', row: 5, moves: 1, column: new_col).where.not(player_id: player.id).any?
+    else
+      game.pieces.where(type: 'Pawn', row: 4, moves: 1, column: new_col).where.not(player_id: player.id).any?
+    end
+  end
 
   def valid_forward_move?
     max_rows_allowed = moved? ? 1 : 2

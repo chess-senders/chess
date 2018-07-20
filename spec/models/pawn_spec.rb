@@ -68,6 +68,39 @@ RSpec.describe Pawn, type: :model do
         expect(pawn_to_move.column).to eq(2)
       end
 
+      it 'to en passant' do
+        w_player = FactoryBot.create(:player, playername: 'Wayne')
+        b_player = FactoryBot.create(:player, playername: 'John')
+        game = FactoryBot.create(
+          :game,
+          white_player: w_player,
+          black_player: b_player
+        )
+
+        pawn = FactoryBot.create(
+          :pawn,
+          game: game,
+          player: b_player,
+          row: 4,
+          column: 3
+        )
+
+        white_pawn = FactoryBot.create(
+          :pawn,
+          game: game,
+          row: 4,
+          column: 2,
+          player: w_player,
+          moves: 1
+        )
+
+        pawn.move_to!(row: 3, column: 2)
+        expect(pawn.row).to eq(3)
+        expect(pawn.column). to eq(2)
+        white_pawn.reload
+        expect(white_pawn.captured).to eq(true)
+      end
+
       context 'as the first move' do
         it 'by moving 2 rows' do
           w_player = FactoryBot.create(:player, playername: 'Wayne')
