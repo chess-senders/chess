@@ -129,7 +129,7 @@ RSpec.describe King, type: :model do
       king = FactoryBot.create(:king, game: game, player: white_player, row: 0, column: 4)
       rook = FactoryBot.create(:rook, game: game, player: white_player, row: 0, column: 7)
 
-      king.move_to!({ row: 0, column: 3 })
+      king.move_to!(row: 0, column: 3)
       king.reload
       king.castle!('kingside')
       expect(king.row).to eq(0)
@@ -145,7 +145,7 @@ RSpec.describe King, type: :model do
       king = FactoryBot.create(:king, game: game, player: white_player, row: 0, column: 4)
       rook = FactoryBot.create(:rook, game: game, player: white_player, row: 0, column: 0)
 
-      rook.move_to!({ row: 0, column: 3 })
+      rook.move_to!(row: 0, column: 3)
       rook.reload
       king.castle!('queenside')
       expect(king.row).to eq(0)
@@ -154,5 +154,4 @@ RSpec.describe King, type: :model do
       expect(rook.column).to eq(3)
     end
   end
-
 end

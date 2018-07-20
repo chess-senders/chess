@@ -20,5 +20,4 @@ class PiecesController < ApplicationController
   def current_piece
     @piece || Piece.find(params[:id])
   end
-
 end
