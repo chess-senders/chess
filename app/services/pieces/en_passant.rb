@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Pieces
   class EnPassant < ApplicationService
     def initialize(piece, new_square)
