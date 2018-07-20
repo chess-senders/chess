@@ -7,7 +7,8 @@ module Pieces
     end
 
     def call
-      new_piece = game.pieces.where(type: 'Pawn',column: new_square[:column], moves: 1).where.not(player_id: piece.player_id).first
+      new_piece = game.pieces.where(type: 'Pawn', column: new_square[:column],
+                                    moves: 1).where.not(player_id: piece.player_id).first
       new_piece.update_attributes(column: nil, row: nil, captured: true)
       piece.update_attributes(column: new_square[:column], row: new_square[:row])
     end

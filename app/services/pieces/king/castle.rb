@@ -10,11 +10,11 @@ module Pieces
         @game = king.game
         @player = king.player
         @direction = direction
-        @rook = get_rook
+        @rook = find_rook
       end
 
       def call
-        return if king.moved || rook.moved
+        return if king.moves != 0 || rook.moves != 0
         return if Pieces::Obstruction.call(king, rook)
         return if direction != 'kingside' && direction != 'queenside'
         king.update_attributes(column: castle_king_column)
@@ -23,9 +23,9 @@ module Pieces
 
       private
 
-      def get_rook
+      def find_rook
         column = direction == 'kingside' ? king.column..Float::INFINITY : 0..king.column
-        game.pieces.where(type: "Rook", player: player).find_by(column: (column))
+        game.pieces.where(type: 'Rook', player: player).find_by(column: column)
       end
 
       def castle_king_column
@@ -35,7 +35,6 @@ module Pieces
       def castle_rook_column
         direction == 'kingside' ? 5 : 2
       end
-
     end
   end
 end

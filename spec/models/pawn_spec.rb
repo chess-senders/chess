@@ -81,22 +81,22 @@ RSpec.describe Pawn, type: :model do
           :pawn,
           game: game,
           player: b_player,
-          row: 4,
+          row: 3,
           column: 3
         )
 
         white_pawn = FactoryBot.create(
           :pawn,
           game: game,
-          row: 4,
+          row: 3,
           column: 2,
           player: w_player,
           moves: 1
         )
 
-        pawn.move_to!(row: 3, column: 2)
-        expect(pawn.row).to eq(3)
-        expect(pawn.column). to eq(2)
+        pawn.move_to!(row: 2, column: 2)
+        expect(pawn.row).to eq(2)
+        expect(pawn.column).to eq(2)
         white_pawn.reload
         expect(white_pawn.captured).to eq(true)
       end

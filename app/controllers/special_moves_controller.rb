@@ -10,6 +10,7 @@ class SpecialMovesController < ApplicationController
   end
 
   private
+
   def castle_params
     params.permit(:direction, :game_id)
   end

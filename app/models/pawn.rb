@@ -14,7 +14,7 @@ class Pawn < Piece
     @new_col = new_square[:column]
 
     super &&
-      (moving_forward? || capturing_piece?) && valid_forward_move?   
+      (moving_forward? || capturing_piece?) && valid_forward_move?
   end
 
   def move_to!(new_square)
@@ -25,7 +25,7 @@ class Pawn < Piece
     end
   end
 
-  def valid_en_passant_move?(new_square)
+  def valid_en_passant_move?(*)
     valid_forward_move? && moving_sideways? && double_moved_pawns?
   end
 
@@ -37,9 +37,11 @@ class Pawn < Piece
 
   def double_moved_pawns?
     if white_player?
-      game.pieces.where(type: 'Pawn', row: 5, moves: 1, column: new_col).where.not(player_id: player.id).any?
+      game.pieces.where(type: 'Pawn', row: 4, moves: 1,
+                        column: new_col).where.not(player_id: player.id).any?
     else
-      game.pieces.where(type: 'Pawn', row: 4, moves: 1, column: new_col).where.not(player_id: player.id).any?
+      game.pieces.where(type: 'Pawn', row: 3, moves: 1,
+                        column: new_col).where.not(player_id: player.id).any?
     end
   end
 
