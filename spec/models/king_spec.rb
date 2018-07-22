@@ -154,4 +154,14 @@ RSpec.describe King, type: :model do
       expect(rook.column).to eq(3)
     end
   end
+
+  describe 'At the start of a player turn or if the player moves his king' do
+    it 'returns true if the king is in check' do
+      expect(king.check?()).to eq(true)
+    end
+
+    it 'returns false if the king is not in check' do
+      expect(king.check?()).to eq(false)
+    end
+  end
 end

@@ -59,27 +59,4 @@ RSpec.describe Game, type: :model do
     end
   end
 
-  describe 'white players turn' do
-    it 'will determine if king is in check' do
-      white_player = FactoryBot.create(:player)
-      black_player = FactoryBot.create(:player)
-      game = FactoryBot.create(:game, state: 1, white_player: white_player,
-                                      black_player: black_player)
-      FactoryBot.create(:piece, player: white_player, row: 1, column: 1, type: 'King',
-                                game: game)
-      FactoryBot.create(:piece, player: black_player, row: 1, column: 2,
-                                type: 'Rook', game: game)
-      expect(game.check?(white_player)).to eq(true)
-    end
-
-    it 'will not call check if king is not in check' do
-      white_player = FactoryBot.create(:player)
-      black_player = FactoryBot.create(:player)
-      game = FactoryBot.create(:game, state: 1, white_player: white_player,
-                                      black_player: black_player)
-      FactoryBot.create(:piece, player: white_player, row: 1, column: 1, type: 'King',
-                                game: game)
-      expect(game.check?(white_player)).to eq(false)
-    end
-  end
 end
