@@ -10,8 +10,12 @@
 		@include icon;
 		border-bottom: none;
 		position: relative;
-
+		color: _palette(accent);
 		> .label {
 			display: none;
 		}
+	}
+
+	.icon-background {
+	    color: white;
 	}

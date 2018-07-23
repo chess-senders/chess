@@ -43,6 +43,7 @@
 		&:hover {
 			border-bottom-color: transparent;
 			color: _palette(fg-bold) !important;
+			text-decoration: none;
 		}
 
 		&.special:not(.button) {
