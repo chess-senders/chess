@@ -16,7 +16,5 @@ class King < Piece
     Pieces::King::Castle.call(self, direction)
   end
 
-  def check?()
-    
-  end
+
 end

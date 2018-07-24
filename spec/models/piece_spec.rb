@@ -100,4 +100,26 @@ RSpec.describe Piece, type: :model do
       expect(piece_start.row).to eq(2)
     end
   end
+
+  describe 'A piece can\'t move if king is in check' do
+    player1 = FactoryBot.build(:player, playername: 'Wayne')
+    player2 = FactoryBot.build(:player, playername: 'Bruce')
+    game = FactoryBot.build(:game, white_player_id: player1.id, black_player_id: player2.id)
+    piece2 = FactoryBot.build(:piece, game: game, game_id: game.id, player: player2, player_id: player2.id, type: 'Bishop', row: 3)
+    king = FactoryBot.build(:piece, game: game, game_id: game.id, player: player2, player_id: player2.id, type: 'King')
+
+    it 'Does not move the piece if the king is in check' do
+      piece1 = FactoryBot.build(:piece, game: game, game_id: game.id, player: player1, player_id: player1.id, type: 'Rook', row: 6)
+      new_square = {:row => 4, :column => 2}
+      piece2.move_to!(new_square)
+      piece2.king_in_check?()
+      expect(piece2.king_in_check?()).to eq(true)
+      expect(piece2.row).to eq(3)
+      expect(piece2.column).to eq(1)
+    end
+
+    # it 'Allows a piece to move if the king is not in check' do
+    #   expect(piece2.move_to!(new_square)).to eq(false)
+    # end
+  end
 end
