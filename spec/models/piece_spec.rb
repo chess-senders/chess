@@ -99,5 +99,17 @@ RSpec.describe Piece, type: :model do
       expect(piece_start.column).to eq(2)
       expect(piece_start.row).to eq(2)
     end
+
+    it 'Should not move to new location if own piece is there' do
+      player1 = FactoryBot.create(:player, playername: 'Wayne')
+      player2 = FactoryBot.create(:player, playername: 'Ricky')
+      game = FactoryBot.create(:game, white_player: player1, black_player: player2)
+      piece_start = FactoryBot.create(:piece, game: game, column: 1, row: 1, player: player1)
+      FactoryBot.create(:piece, game: game, column: 2, row: 2, player: player1)
+      move = piece_start.move_to!(row: 2, column: 2)
+      expect(move).to eq(false)
+      expect(piece_start[:column]).to eq(1)
+      expect(piece_start[:row]).to eq(1)
+    end
   end
 end
