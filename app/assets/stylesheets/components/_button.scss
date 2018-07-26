@@ -82,8 +82,4 @@
 		&:disabled {
 			opacity: 0.25;
 		}
-
-		@include breakpoint('<=xsmall') {
-			padding: 0;
-		}
 	}

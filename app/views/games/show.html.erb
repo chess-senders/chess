@@ -1,44 +1,60 @@
-<h1><%= @game.white_player.playername %> - <%= @game.name %></h1>
+<div id="game" class='game_wrapper'>
+	<section class="inner">
+		<section>
+			<h1><%= @game.name %></h1>
+			<ul>
+				<li><h4><span>Game Author: </span><%= @game.white_player.playername %></h4></li>
+				<li><h4><span>Date Created: </span><%= @game.created_at.strftime("%b %d, %Y") %></h4></li>
+				<li><h4><span>White Player: </span><%= @game.white_player.playername %></h4></li>
+				<li><h4><span>Black Player: </span><%= @game.black_player ? @game.black_player.playername : 'Waiting for player' %></h4></li>
+			</ul>
+		</section>
 
-<h4><%= @game.state %></h4>
+		<h1 id='game_state'><%= @game.state %></h1>
+<!--
+		<h3>Speical Moves</h3>
+		<%= button_tag "Castle Queenside",
+			class: 'castle',
+			data: {
+				url: game_castle_path(@game),
+				direction: 'queenside'
+			}
+		%>
+		<%= button_tag "Castle Kingside",
+			class: 'castle',
+			data: {
+				url: game_castle_path(@game),
+				direction: 'kingside'
+			}
+		%> -->
 
-<h3>Speical Moves</h3>
-<%= button_tag "Castle Queenside",
-	class: 'castle',
-	data: {
-		url: game_castle_path(@game),
-		direction: 'queenside'
-	}
-%>
-<%= button_tag "Castle Kingside",
-	class: 'castle',
-	data: {
-		url: game_castle_path(@game),
-		direction: 'kingside'
-	}
-%>
+			<table class='chessboard'>
+				<% @chess_board.each_with_index do |row, y| %>
+					<tr>
+						<% row.each_with_index do |piece, x| %>
+							<td  data-row=<%= y %> data-column=<%= x %>
+								class=<%= (!piece.nil? && Pieces::Disabled.call(piece)) ? 'draggable' : 'droppable' %> >
+								<div>
+									<% if !piece.nil? %>
+										<%= image_tag piece.picture,
+										class: "piece",
+										data: {
+				              row: y,
+				              column: x,
+				              url: piece_path(piece)
+				            }
+										%>
+									<% end %>
+								</div>
+			        </td>
+						<% end %>
+					</tr>
+				<% end %>
+			</table>
 
-<table class='chessboard'>
-	<% @chess_board.each_with_index do |row, y| %>
-		<tr>
-			<% row.each_with_index do |piece, x| %>
-				<td  data-row=<%= y %> data-column=<%= x %>
-					class=<%= (!piece.nil? && Pieces::Disabled.call(piece)) ? 'draggable' : 'droppable' %> >
-          <% if !piece.nil? %>
-						<%= image_tag piece.picture,
-						class: "piece",
-						data: {
-              row: y,
-              column: x,
-              url: piece_path(piece)
-            }
-						%>
-					<% end %>
-        </td>
-			<% end %>
-		</tr>
-	<% end %>
-</table>
+
+	</section>
+</div>
 
 <script type="text/javascript">
 	$(()=>{

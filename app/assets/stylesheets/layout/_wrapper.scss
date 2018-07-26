@@ -161,22 +161,26 @@
 		&.spotlight {
 			@include wrapper-edges-color(_palette(accent));
 			background-color: _palette(accent);
-
+			text-align: right;
 			.inner {
 				@include vendor('display', 'flex');
 				@include vendor('align-items', 'center');
 				@include vendor('flex-direction', 'row');
 			}
 
+			.content {
+				text-align: left;
+			}
+
 			.image {
-				border-radius: 100%;
-				margin: 0 _size(section-spacing, large) _size(element-margin) 0;
-				width: 22em;
+				margin: 0 0 _size(element-margin) _size(section-spacing, large);
+				width: 100em;
 				overflow: hidden;
 				-ms-flex: 1;
+				padding: 4rem 2rem;
+				background: white;
 
 				img {
-					border-radius: 100%;
 					width: 100%;
 				}
 			}
@@ -186,15 +190,16 @@
 				-ms-flex: 2;
 			}
 
-			&:nth-child(2n - 1) {
+			&:nth-child(even) {
 				.inner {
 					@include vendor('flex-direction', 'row-reverse');
-					text-align: right;
+					text-align: left;
 				}
 
 				.image {
-					margin: 0 0 _size(element-margin) _size(section-spacing, large);
+					margin: 0 _size(section-spacing, large) _size(element-margin) 0;
 				}
+
 			}
 
 			@for $i from 2 through _misc(max-wrapper-styles) {
@@ -233,6 +238,7 @@
 				.image {
 					margin: 0 _size(section-spacing, medium) _size(element-margin) 0;
 					width: 32em;
+					padding: 2rem 1rem;
 				}
 
 				&:nth-child(2n - 1) {
@@ -264,36 +270,19 @@
 			}
 
 			&.spotlight {
-				.inner {
-					@include vendor('align-items', 'flex-start');
-				}
+				&.spotlight {
+					.inner {
+						display: block;
+					}
 
-				.image {
-					width: 19em;
-					margin: 0 _size(section-spacing, small) _size(element-margin) 0;
-				}
-
-				&:nth-child(2n - 1) {
 					.image {
-						margin: 0 0 _size(element-margin) _size(section-spacing, small);
+						margin: 0 0 (_size(element-margin) * 0.5) 0 !important;
+						width: 100%;
 					}
 				}
 			}
 		}
 
-		@include breakpoint('<=xsmall') {
-			&.spotlight {
-				.inner {
-					display: block;
-				}
-
-				.image {
-					margin: 0 0 (_size(element-margin) * 0.5) 0 !important;
-					max-width: 85%;
-					width: 12em;
-				}
-			}
-		}
 
 		@include breakpoint('<=xxsmall') {
 			.inner {
