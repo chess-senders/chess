@@ -1,10 +1,21 @@
-<h1>List of Games</h1>
 
-<ul>
-  <% @games.available.each do |game| %>
-    <li>
-      <h4><%= game.white_player.playername %> - <%= game.name %></h4>
-      <%= button_to 'Join Game', game_path(game), :method=> :put %>
-    </li>
-  <% end %>
-</ul>
+<section id='games_index' >
+  <div class="inner">
+    <h1>Join a Game</h1>
+
+    <ul>
+      <% @games.available.each do |game| %>
+        <li>
+          <div class="game">
+            <h1><%= game.name %></h1>
+            <ul>
+              <li><h4><span>White Player: </span><%= game.white_player.playername %></h4></li>
+      				<li><h4><span>Date Created: </span><%= game.created_at.strftime("%b %d, %Y") %></h4></li>
+      			</ul>
+          </div>
+          <%= button_to 'Join Game', game_path(game), :method=> :put, class: 'join_game' %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</section>
