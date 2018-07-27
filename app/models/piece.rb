@@ -3,7 +3,13 @@ class Piece < ApplicationRecord
   belongs_to :player
 
   def move_to!(new_square)
-    Pieces::MoveTo.call(self, new_square) if valid_move?(new_square) && !king_in_check?()
+     valid = valid_move?(new_square) 
+	kic = king_in_check?()
+puts "VALID: #{valid} + KIC #{kic}"
+if valid && !kic
+puts "VALID AND NOT IN CHECK"
+	Pieces::MoveTo.call(self, new_square)
+end
   end
 
   def color
@@ -11,12 +17,14 @@ class Piece < ApplicationRecord
   end
 
   def king_in_check?()
-    king = Piece.where(game_id: self.game_id, player_id: self.player_id, type: 'King')
-    opponents_pieces = Piece.where(game_id: self.game_id, player_id: !self.player_id, captured: false)
+    king = Piece.find_by(game_id: self.game_id, player_id: self.player_id, type: 'King')
+    opponents_pieces = Piece.where(game_id: self.game_id, captured: false).where.not(player_id: self.player_id)
+puts "OP PIECE COUNT: #{opponents_pieces.count}"
     opponents_pieces.each do |piece|
       print "row#{piece.row}"
-      puts "col#{piece.col}"
-      print "WTF"
+      puts "col#{piece.column}"
+      #print ""
+puts "CLASS: #{piece.class}"
       return true if piece.valid_move?(row: king.row, column: king.column)
     end
     false

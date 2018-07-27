@@ -80,6 +80,7 @@ RSpec.describe Piece, type: :model do
       game = FactoryBot.create(:game, white_player: player1, black_player: player2)
       piece_start = FactoryBot.create(:piece, game: game, column: 1, row: 1, player: player1)
       piece_end = FactoryBot.create(:piece, game: game, column: 3, row: 3, player: player2)
+      king = FactoryBot.create(:piece, game: game, game: game, player: player1, column: 4, row: 1, type: 'King')
 
       move = piece_start.move_to!(row: piece_end.row, column: piece_end.column)
       expect(move).to eq(true)
@@ -102,14 +103,14 @@ RSpec.describe Piece, type: :model do
   end
 
   describe 'A piece can\'t move if king is in check' do
-    player1 = FactoryBot.build(:player, playername: 'Wayne')
-    player2 = FactoryBot.build(:player, playername: 'Bruce')
-    game = FactoryBot.build(:game, white_player_id: player1.id, black_player_id: player2.id)
-    piece2 = FactoryBot.build(:piece, game: game, game_id: game.id, player: player2, player_id: player2.id, type: 'Bishop', row: 3)
-    king = FactoryBot.build(:piece, game: game, game_id: game.id, player: player2, player_id: player2.id, type: 'King')
-
     it 'Does not move the piece if the king is in check' do
-      piece1 = FactoryBot.build(:piece, game: game, game_id: game.id, player: player1, player_id: player1.id, type: 'Rook', row: 6)
+      player1 = FactoryBot.create(:player, playername: 'Wayne')
+      player2 = FactoryBot.create(:player, playername: 'Bruce')
+      game = FactoryBot.create(:game, white_player_id: player1.id, black_player_id: player2.id)
+      piece2 = FactoryBot.create(:piece, game: game, game_id: game.id, player: player2, player_id: player2.id, type: 'Bishop', row: 3)
+      king = FactoryBot.create(:piece, game: game, game_id: game.id, player: player2, player_id: player2.id, type: 'King')
+
+      piece1 = FactoryBot.create(:piece, game: game, game_id: game.id, player: player1, player_id: player1.id, type: 'Rook', row: 6)
       new_square = {:row => 4, :column => 2}
       piece2.move_to!(new_square)
       piece2.king_in_check?()

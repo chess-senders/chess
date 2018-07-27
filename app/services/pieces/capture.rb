@@ -7,10 +7,16 @@ module Pieces
     end
 
     def call
+puts "IN CAPTURE"
       new_piece = game.get_piece(square)
       return false if new_piece.player_id == piece.player_id
+puts "DIDN'T RETURN  FALSE"
       piece.update_attributes(column: square[:column], row: square[:row])
-      new_piece.update_attributes(row: nil, column: nil, captured: true)
+puts "UPDATED PIECE"
+      val = new_piece.update_attributes(row: nil, column: nil, captured: true)
+puts "UPDATED NEW_PIECE"
+puts "val #{val}"
+val
     end
 
     private
