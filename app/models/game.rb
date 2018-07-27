@@ -11,7 +11,8 @@ class Game < ApplicationRecord
     "White's Turn",
     "Black's Turn",
     'Black Won',
-    'White Won'
+    'White Won',
+    'Stalemate'
   ]
 
   def get_piece(square)

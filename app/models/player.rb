@@ -6,7 +6,27 @@ class Player < ApplicationRecord
          :omniauthable, omniauth_providers: %i[facebook google_oauth2]
 
   def games
-    Game.where(white_player_id: self).or(Game.where(black_player_id: self))
+    games = Game.where(white_player_id: self).or(Game.where(black_player_id: self))
+  end
+
+  def games_in_progress
+    games.where(state: [0,1,2])
+  end
+
+  def games_won
+    Game.where(white_player_id: self, state: 4).or(Game.where(black_player_id: self, state: 3)).count
+  end
+
+  def games_lost
+    Game.where(white_player_id: self, state: 3).or(Game.where(black_player_id: self, state: 4)).count
+  end
+
+  def games_drawn
+    games.where(state: 5).count
+  end
+
+  def total_games
+    total_games = games_won + games_lost
   end
 
   def self.from_omniauth(auth)
