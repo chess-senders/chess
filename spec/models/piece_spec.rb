@@ -25,6 +25,10 @@ RSpec.describe Piece, type: :model do
       expect(piece.row).to eq(1)
       expect(piece.column).to eq(1)
     end
+
+    it 'cannot move if it will put the king in check' do
+
+    end
   end
 
   describe 'A piece checks for obstructions' do

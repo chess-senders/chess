@@ -24,4 +24,5 @@ class Piece < ApplicationRecord
   def valid_movement?(max, min, new_pos)
     (new_pos <= max) && (new_pos >= min)
   end
+
 end

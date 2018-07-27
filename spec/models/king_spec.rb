@@ -79,6 +79,20 @@ RSpec.describe King, type: :model do
       expect(king.row).to eq(2)
       expect(king.column).to eq(2)
     end
+
+    it 'will not allow a player to move into check' do
+      white_player = FactoryBot.create(:player)
+      black_player = FactoryBot.create(:player)
+      game = FactoryBot.create(:game, state: 1, white_player: white_player,
+                                      black_player: black_player)
+      king = FactoryBot.create(:king, player: white_player, row: 1, column: 1,
+                                game: game)
+      rook = FactoryBot.create(:piece, player: black_player, row: 2, column: 2, type: 'Rook',
+                                game: game)
+      king.move_to!({:row=>2, :column=>1})
+      expect(king.row).to eq(1)
+    end
+
   end
 
   describe 'tries to make special move' do
@@ -154,4 +168,5 @@ RSpec.describe King, type: :model do
       expect(rook.column).to eq(3)
     end
   end
+
 end

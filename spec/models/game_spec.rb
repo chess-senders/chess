@@ -81,5 +81,6 @@ RSpec.describe Game, type: :model do
                                 game: game)
       expect(game.check?(white_player)).to eq(false)
     end
+
+    end
   end
-end

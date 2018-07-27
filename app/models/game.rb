@@ -26,7 +26,7 @@ class Game < ApplicationRecord
     Games::AddPieces.call(self)
   end
 
-  def check?(player)
+  def check?(player) #need to seperate out the king trying to move to  new square vs the king on static square
     king = pieces.where(player: player, type: 'King').first
     opponent_pieces = pieces.where.not(player: player)
     opponent_pieces.each do |piece|
