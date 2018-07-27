@@ -5,8 +5,8 @@ class PiecesController < ApplicationController
       #   return redirect_to game_path(game)
       # end
     Games::UpdateState.call(game) if current_piece.move_to!(new_square_params)
-    flash[:notice] = '#{game.white_player.playername} is in check' if game.check?(game.white_player)
-    flash[:notice] = '#{game.black_player.playername} is in check' if game.check?(game.black_player)
+    flash[:notice] = "#{game.white_player.playername} is in check" if game.check?(game.white_player)
+    flash[:notice] = "#{game.black_player.playername} is in check" if game.check?(game.black_player)
     redirect_to game_path(game)
   end
 
