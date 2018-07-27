@@ -46,6 +46,9 @@ group :development, :test do
   gem 'capybara'
   gem 'database_cleaner'
   gem 'awesome_print'
+  gem "chromedriver-helper"
+  gem 'selenium-webdriver', '~> 2.53', '>= 2.53.4'
+  gem 'launchy', '~> 2.4', '>= 2.4.3'
 end
 
 group :development do

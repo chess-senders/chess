@@ -39,9 +39,8 @@
             <section class='dashboard_navigation'>
               <nav id="menu">
                 <ul>
-                  <li>
+                  <li id='my_games_dropdown'>
                     <span class='opener'>My Games</span>
-                    <!-- <%= link_to 'Create a Game', new_game_path, class: 'dropper', method: :get %> -->
 										<ul>
                       <% current_player.games.each do |game| %>
   											<li>
@@ -60,7 +59,7 @@
                   						<label for="game_name">Game Name</label>
                   						<input type="text" name="name" id="game_name" />
                   					</div>
-                            <button id='create_game' class='primary' data-url="<%= games_path %>">Create!</button>
+                            <button id='create_game' class='primary' data-url="<%= games_path %>">create!</button>
                             <button type="reset" calue='Reset' name="button">Cancel</button>
                   			</form>
                       </li>
