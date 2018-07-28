@@ -5,6 +5,7 @@
     <%= csrf_meta_tags %>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 
+    <%= action_cable_meta_tag %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
@@ -19,7 +20,9 @@
         <% if alert.present? %>
           <p class="alert alert-danger text-center"><%= alert %></p>
         <% end %>
+        <div id='messages'>
 
+        </div>
         <%= yield %>
       </div>
 

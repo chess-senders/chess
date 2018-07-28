@@ -8,6 +8,7 @@ class PiecesController < ApplicationController
       # end
     Games::UpdateState.call(@game) if @piece.move_to!(new_square_params)
     redirect_to game_path(@game)
+    ActionCable.server.broadcast 'messages', message: 'shaka laka'
   end
 
   private
