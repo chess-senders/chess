@@ -3,7 +3,8 @@ class Piece < ApplicationRecord
   belongs_to :player
 
   def move_to!(new_square)
-    Pieces::MoveTo.call(self, new_square) if valid_move?(new_square)
+    Pieces::MoveTo.call(self, new_square) if valid_move?(new_square) &&
+    !self.game.check?(self.player)
   end
 
   def color

@@ -37,8 +37,8 @@ RSpec.describe Piece, type: :model do
                                 game: game)
       bishop = FactoryBot.create(:bishop, player: black_player, row: 3, column: 3,
                                   game: game)
-      rook.move_to!({:row=>2, :column=>8})
-      expect(rook.column).to eq(2)
+      rook.move_to!({:row=>5, :column=>2}) #fails for row but not column
+      expect(rook.row).to eq(2)
     end
   end
 
@@ -94,7 +94,7 @@ RSpec.describe Piece, type: :model do
       player2 = FactoryBot.create(:player, playername: 'Ricky')
       game = FactoryBot.create(:game, white_player: player1, black_player: player2)
       piece_start = FactoryBot.create(:piece, game: game, column: 1, row: 1, player: player1)
-      piece_end = FactoryBot.create(:piece, game: game, column: 3, row: 3, player: player2)
+      piece_end = FactoryBot.create(:piece, game: game, column: 2, row: 2, player: player2)
 
       move = piece_start.move_to!(row: piece_end.row, column: piece_end.column)
       expect(move).to eq(true)

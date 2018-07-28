@@ -30,8 +30,17 @@ class Game < ApplicationRecord
     king = pieces.where(player: player, type: 'King').first
     opponent_pieces = pieces.where.not(player: player)
     opponent_pieces.each do |piece|
+      puts "KING ROW: #{king.row}"
+      puts "PIECE ROW: #{piece.row}"
       return true if piece.valid_move?(row: king.row, column: king.column)
     end
     false
   end
+
+  def checkmate?(player)
+    if check?(player)
+
+    end
+  end
+
 end
