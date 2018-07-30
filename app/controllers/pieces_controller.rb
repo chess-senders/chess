@@ -2,13 +2,11 @@ class PiecesController < ApplicationController
   def update
     @piece = current_piece
     @game = @piece.game
-    # stops opponent from moving current players pieces, keep commented for local testing.
-      # unless current_player == @piece.player
-      #   return redirect_to game_path(@game)
-      # end
+    # unless current_player == @piece.player
+    #   return redirect_to game_path(@game)
+    # end
     Games::UpdateState.call(@game) if @piece.move_to!(new_square_params)
-    redirect_to game_path(@game)
-    ActionCable.server.broadcast 'messages', message: 'shaka laka'
+    ActionCable.server.broadcast 'messages', game_state: @game.state
   end
 
   private
