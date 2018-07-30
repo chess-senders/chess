@@ -11,12 +11,23 @@
         </div>
 
         <div class="field">
+          <%= f.label :playername %><br />
+          <%= f.email_field :playername, autofocus: true %>
+        </div>
+
+        <div class="field">
+          <%= f.label :email %><br />
+          <%= f.email_field :email, autocomplete: "email" %>
+        </div>
+
+        <div class="field">
           <label for="password">Password</label>
           <% if @minimum_password_length %>
           <em>(<%= @minimum_password_length %> characters minimum)</em>
           <% end %><br />
           <%= f.password_field :password, autocomplete: "off" %>
         </div>
+
 
         <div class="field">
           <%= f.label :password_confirmation %><br />
