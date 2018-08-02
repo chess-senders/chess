@@ -1,0 +1,16 @@
+#game_notifications {
+  border-top: 1px solid white;
+  padding: .5rem 0;
+  margin: .5rem 0;
+
+  #game_state {
+    background: rgba(_palette(p3), 0.5);
+    padding: 1rem;
+  }
+
+  .game_alerts {
+    background: rgba(219, 78, 78, .8);
+    padding: 1rem 0;
+    text-align: center;
+  }
+}

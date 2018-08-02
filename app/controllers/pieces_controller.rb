@@ -9,8 +9,6 @@ class PiecesController < ApplicationController
     end
 
     Games::UpdateState.call(@game) if @piece.move_to!(new_square_params)
-    flash[:notice] = "#{@game.white_player.playername} is in check" if @game.check?(@game.white_player)
-    flash[:notice] = "#{@game.black_player.playername} is in check" if @game.check?(@game.black_player)
 
     ActionCable.server.broadcast('game',
       html: ApplicationController.render(

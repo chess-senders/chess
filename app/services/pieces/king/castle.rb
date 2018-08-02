@@ -14,14 +14,19 @@ module Pieces
       end
 
       def call
-        return if king.moves != 0 || rook.moves != 0
-        return if Pieces::Obstruction.call(king, rook)
+        return unless castle?
         return if direction != 'kingside' && direction != 'queenside'
         king.update_attributes(column: castle_king_column)
         rook.update_attributes(column: castle_rook_column)
       end
 
       private
+
+      def castle?
+        return false if king.moves != 0 || rook.moves != 0
+        return false if Pieces::Obstruction.call(king, rook)
+        true
+      end
 
       def find_rook
         column = direction == 'kingside' ? king.column..Float::INFINITY : 0..king.column
