@@ -10,7 +10,7 @@ class Player < ApplicationRecord
   end
 
   def games_in_progress
-    games.where(state: [0, 1, 2])
+    games.where(state: [1, 2])
   end
 
   def games_won
