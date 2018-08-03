@@ -1,0 +1,59 @@
+.image_row {
+  margin: _size(element-margin) 0;
+
+  .inner {
+    margin: 0 auto;
+    width: _size(inner);
+    padding-top: 8rem;
+  }
+
+  ul {
+    @include vendor('display', 'flex');
+    @include vendor('flex-wrap', 'wrap');
+    @include vendor('justify-content', 'space-between');
+    @include vendor('align-items', 'center');
+    margin-bottom: 0px;
+    list-style: none;
+
+    li {
+      width: 22%;
+    }
+  }
+
+  @include breakpoint('<=large') {
+    .inner {
+      padding-bottom: 6rem;
+    }
+  }
+
+  @include breakpoint('<=medium') {
+    .inner {
+      @include padding(3em, 3em);
+      width: 100%;
+    }
+
+    ul li {
+      width: 45%;
+    }
+  }
+
+  @include breakpoint('<=small') {
+    .inner {
+      @include padding(2em, 2em);
+    }
+
+    ul li {
+      text-align: center;
+      width: calc(50% - #{_size(section-spacing, small) * 0.5} - 1px);
+    }
+  }
+
+  @include breakpoint('<=xsmall') {
+    display: block;
+
+    ul li {
+      width: 100%;
+      margin: 0 0 _size(element-margin) 0 !important;
+    }
+  }
+}

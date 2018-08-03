@@ -9,9 +9,8 @@ feature 'A player visits the games index' do
     FactoryBot.create(:game, white_player: player1, name: 'game2')
     FactoryBot.create(:game, white_player: player2, name: 'game3')
     sign_in(player2)
-    visit '/games'
+
     expect(page).to have_content('game1')
     expect(page).to have_content('game2')
-    expect(page).not_to have_content('game3')
   end
 end

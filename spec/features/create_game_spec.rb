@@ -1,16 +1,22 @@
 require 'rails_helper'
 require 'support/sign_in'
 
-feature 'A player creates a game' do
+Capybara.automatic_reload = false
+Capybara.default_max_wait_time = 10
+
+describe 'A player creates a game', feature: true, js: true do
   scenario 'A player creates a game with a valid user' do
     player = FactoryBot.create(:player, playername: 'Wayne')
     game = FactoryBot.create(:game, white_player: player)
     sign_in(player)
-    click_link('Create Game')
-    visit '/games/new'
-    fill_in('Game name', with: game.name)
+
+    find('#create_game_dropdown').click
+    fill_in('name', with: 'game123')
     click_button('create!')
-    visit "/games/#{game.id}"
-    expect(page).to have_content(game.name)
+
+    expect(page).to have_content('game123')
+
+    find('#my_games_dropdown').click
+    save_and_open_screenshot
   end
 end

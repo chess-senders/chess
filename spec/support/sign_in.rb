@@ -1,6 +1,6 @@
 def sign_in(player)
   login_as(player, scope: :player)
-  visit "/players/#{player.id}"
+  visit games_path
+  find('#sidebar').click
   expect(page).to have_content(player.playername)
-  expect(page).to have_link('Dashboard')
 end
