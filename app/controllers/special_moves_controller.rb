@@ -2,6 +2,7 @@ class SpecialMovesController < ApplicationController
   def castle
     params = castle_params
     @game = Game.find(params[:game_id])
+    @game_pieces = @game.pieces.where(captured: false)
     player = get_player(@game)
     king = @game.pieces.where(type: 'King').find_by(player: player)
     Pieces::King::Castle.call(king, params[:direction])

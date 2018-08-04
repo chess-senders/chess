@@ -31,6 +31,17 @@ class GamesController < ApplicationController
     if @game.valid? && current_player != @game.white_player
       @game.update(black_player: current_player, state: 1)
       @game.add_pieces_to_board
+
+      ActionCable.server.broadcast('game',
+        html: ApplicationController.render(
+          partial: 'games/chessboard',
+          locals: {
+            message: 'Shaka Melaka Brroooo',
+            :@game => @game,
+            :@chess_board => Games::RenderChessboard.call(@game.pieces.where(captured: false))
+          }
+        )
+      )
       redirect_to game_path(@game)
     else
       render :new, status: :unprocessable_entity

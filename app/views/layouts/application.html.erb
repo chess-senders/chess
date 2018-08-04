@@ -5,6 +5,7 @@
     <%= csrf_meta_tags %>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 
+    <%= action_cable_meta_tag %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
@@ -31,9 +32,11 @@
               <h3>// <span>Dashboard</span></h3>
               <h2><%= current_player.playername %></h2>
               <p>Last active: <%= current_player.last_sign_in_at.strftime("%b %d, %Y") %></p>
-              <h3><span>Games won:</span> 10</h3>
-              <h3><span>Games lost:</span> 5</h3>
-              <h3><span>Total games played:</span> 15</h3>
+              <h3>Games</h3>
+              <h3><span>Won: </span><%= current_player.games_won %></h3>
+              <h3><span>Lost: </span><%= current_player.games_lost %></h3>
+              <h3><span>Drawn: </span>:</span><%= current_player.games_drawn %></h3>
+              <h3><span>Total played: </span><%= current_player.total_games %></h3>
 
             </section>
             <section class='dashboard_navigation'>
@@ -43,6 +46,16 @@
                     <span class='opener'>My Games</span>
 										<ul>
                       <% current_player.games.each do |game| %>
+  											<li>
+                          <%= link_to game.name, game_path(game) %>
+                        </li>
+                      <% end %>
+										</ul>
+									</li>
+                  <li id='my_games_dropdown'>
+                    <span class='opener'>My Active Games</span>
+										<ul>
+                      <% current_player.games_in_progress.each do |game| %>
   											<li>
                           <%= link_to game.name, game_path(game) %>
                         </li>
